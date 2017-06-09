@@ -6,13 +6,13 @@
 <title>目指せ！年収〇〇万円！</title>
 </head>
 <body>
-
-<form method="get" th:action="@{/h2}">
+<!-- <form method="get" th:action="@{/h2}">
   <input type="text" name="age" placeholder="年齢" />
   <input type="submit" value="決定"/>
-</form>
+</form> -->
+
 <input name="modoriti"  />
-<!-- <div class="title"> -->
+
 
 <!-- form内において、エンターキーや、決定ボタンを押すと/h2に飛び、@GetMapping("/h2")の処理を行う　→① -->
 <form method="get" th:action="@{/h2}">
@@ -57,12 +57,8 @@
   <input type="submit" value="決定"/>
 </form>
 <!-- 表示される文章================== -->
-<ul>
-  <li><span th:text="${age}">20</span>才です。 </li>   
-</ul>
 
-
-
+ 
 
 <br />
 <!-- 送信ボタン　入力コマンド　kekkaに表示=============================== -->
@@ -220,7 +216,7 @@
 
 <!-- 送信ボタン　入力コマンド=============================== -->
 <form method="get" th:action="@{/form32}">
-  <input type="text" name="yatin" placeholder="家賃" />
+  <input type="text" name="yatin" placeholder="生活費" />
   <input type="submit" value="決定"/>
 </form>
 <!-- 表示される文章================== -->
@@ -241,9 +237,9 @@
 </ul>
 
 
-マイホームを購入する場合、どれくらいの金額を想定しますか１？<br />
+<!-- マイホームを購入する場合、どれくらいの金額を想定しますか１？ --><br />
 <!-- 送信ボタン　入力コマンド=============================== -->
-<form method="get" th:action="@{/form34}">
+<!-- <form method="get" th:action="@{/form34}">
 <p><input type="text" name="myhome1" placeholder="家賃" /></p>
 
 マイホームを購入する場合、どれくらいの金額を想定しますか２？<br />
@@ -253,7 +249,7 @@
 <ul>
   <li>1+2=<span th:text="${myhome3}">2</span>円です。 </li>   
 </ul>
-
+-->
 
 <!-- 合計金額の表示 -->
 合計は
@@ -313,6 +309,11 @@
 <br /> 
 <a href="kekka.html"> <br /> 
 結果
+</a> 
+<br />
+
+<a href="kakunin.html"> <br /> 
+確認
 </a> 
 <br />
 

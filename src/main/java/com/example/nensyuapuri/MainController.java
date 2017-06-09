@@ -24,7 +24,7 @@ public class MainController {
     public int sum;
     public int yatin;
     public int myhome;
-/////////////////////////////////////////データベースに値を挿入　data.sql参照///////////////////////////////////////    
+/////////////////////////////////////////えデータベースに値を挿入　data.sql参照///////////////////////////////////////    
     @Autowired///////////////////////データベースjdbcを使用します
     private JdbcTemplate jdbc;
     
@@ -41,12 +41,12 @@ public class MainController {
     
 /////////////////////////////////////////////////////////////////////////////////    
 
-    public String plus(int num1, int num2, int num3, Model model){
+ /*   public String plus(int num1, int num2, int num3, Model model){
         jdbc.update("insert into person (num1, num2, num3)values("+ num1 + "," + num2 + "," + num3 + ")");
         
         return "index";
       }
-   
+ */  
 /////////////////////////////////////////////////////////////////////////////////    
 
     public String plus(int age, Model model){
@@ -54,19 +54,19 @@ public class MainController {
         
         return "index";
       }
-    
-    
-    
-    
-    
-    
-    
-    
+
 ///////////////////////////////////////////    
     /*index.html を/htmlで表示するメソッド*/
     @GetMapping("/index")
     public String index(){
         return "index";
+    }
+    
+    
+    
+    @GetMapping("/kakunin")
+    public String kakunin(){
+        return "kakunin";
     }
 
 //年齢(age)をindexで入力して、indexで表示///////////////////////////////////////////////
@@ -97,14 +97,7 @@ public class MainController {
         model.addAttribute("nensyu", money);
         return "kekka";
     }
-    
-    
-    
-    
- 
-    
-    
-    
+
   //子供(kodomo)をindexで入力して、indexで表示
     @GetMapping("/form1")
     public String kodomodisplay(int kodomo, Model model){
@@ -120,7 +113,9 @@ public class MainController {
     
     @GetMapping("/form32")
     public String yatindisplay(int yatin, Model model){
-    model.addAttribute("yatin", yatin);
+        jdbc.update("UPDATE person SET yatin = ?", yatin);// 一行目のyatinをupdate
+        model.addAttribute("yatin", yatin);
+        System.out.println(jdbc.queryForList("SELECT * FROM person"));
     return "index";
     }
     
@@ -130,48 +125,31 @@ public class MainController {
     return "index";
     }
     
-    @GetMapping("/form34")
+/*    @GetMapping("/form34")
     public String myhomedisplay(int myhome1,int myhome2, Model model){
     model.addAttribute("myhome3", myhome1+myhome2);
     return "index";
-    }
+}
+*/    
     
     public int myhome1;
     public int myhome2;
     public int myhome3=myhome1+myhome2;
     
-/*    public String plus(int myhome3, Model model){
-        jdbc.update("insert into person (myhome3)values("+ myhome3 + ")");
-        return "index";
-      }
-*/    
-    
-    
-    
-    
+
   
     
     @GetMapping("/form41")
     public String carpricedisplay(int carprice, Model model){
         jdbc.update("UPDATE person SET carprice = ?", carprice);// 一行目のcarpriceをupdate
+ //       jdbc.update("insert into person (age, name, gender,carprice,num1, num2, num3) values (age,'syota','male',?,0,5,5)",carprice);
         System.out.println(jdbc.queryForList("SELECT * FROM person"));//コンソールに表示
         model.addAttribute("carprice", carprice);//htmlに表示
     return "index";
     }
     
     
-/*    @GetMapping("/form")
-    public String agedisplay(int age, Model model) {
-        // 一行目のageをupdate
-        jdbc.update("UPDATE person SET age = ?", age);
-        System.out.println(jdbc.queryForList("SELECT * FROM person"));
-
-        // html にageを表示　to model
-        model.addAttribute("age", age);
-
-        return "index";
-    }
-*/    
+   
     
     
     //kekkaにnensyu+kyuryo=moneyを設定
@@ -181,11 +159,6 @@ public class MainController {
             return "index";
             }
         
- /*           @GetMapping("/kekka")
-            public String sumkekka(Model model){
-                model.addAttribute("ie", sum);
-                return "kekka";
-            }
- */   
+ 
     
 }
