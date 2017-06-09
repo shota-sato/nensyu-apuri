@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="style.css" />
+<title>目指せ！年収〇〇万円！</title>
+</head>
+<body>
+
+<form method="get" th:action="@{/h2}">
+  <input type="text" name="age" placeholder="年齢" />
+  <input type="submit" value="決定"/>
+</form>
+<input name="modoriti"  />
+<!-- <div class="title"> -->
+
+<!-- form内において、エンターキーや、決定ボタンを押すと/h2に飛び、@GetMapping("/h2")の処理を行う　→① -->
+<form method="get" th:action="@{/h2}">
+  <input type="text" name="num1" />
+  <input type="text" name="num2" />
+  <input type="text" name="num3" />
+  <input type="submit" value="決定"/>
+</form>
+
+
+
+<ul>
+  <li><span th:text="${num1}">400</span>円でごわす！ </li>
+</ul>
+
+
+<h1 id="title">目指せ年収〇〇万円！</h1>
+
+
+
+<!-- 画像の貼り付け -->
+<img src="kuruma.gif" /> 
+<img src="ie.gif" />
+<img src="marry.png" />
+
+<p>質問にお答えください</p>
+
+<p>
+性別は？<br /> 
+<select name="gender">
+<option value="man">男性</option>
+<option value="woman">女性</option>
+</select>
+</p>
+
+<!-- 送信ボタン /formに飛ぶ=========================================== -->
+現在の年齢は？<br />
+
+<!-- 送信ボタン　入力コマンド=============================== -->
+<form method="get" th:action="@{/form}">
+  <input type="text" name="age" placeholder="年齢" />
+  <input type="submit" value="決定"/>
+</form>
+<!-- 表示される文章================== -->
+<ul>
+  <li><span th:text="${age}">20</span>才です。 </li>   
+</ul>
+
+
+
+
+<br />
+<!-- 送信ボタン　入力コマンド　kekkaに表示=============================== -->
+
+
+現在の年収と今月分の給料は？<br />
+<form method="get" th:action="@{/kekka1}">
+  <input type="text" name="nensyu" placeholder="年収" />
+  <input type="text" name="kyuryo" placeholder="給料" />
+  <input type="submit" value="決定"/>
+</form>
+
+<br />
+<br />
+<!-- 点線枠でくくって、背景クリーム色 -->
+<div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #ffff99;">
+
+<!-- 結婚の質問リスト＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
+
+<h2>１．結婚について</h2>
+<!-- 質問リスト -->
+
+<form action="cgi-bin/aaa.cgi" method="post">
+
+			<p>
+				質問：結婚してますか？<br /> <select name="marry">
+					<option value="yes">はい</option>
+					<option value="no">いいえ</option>
+				</select>
+			</p>
+
+
+			<p>
+				質問：結婚式はあげましたか？<br /> <select name="marrysiki">
+					<option value="yes">はい</option>
+					<option value="no">いいえ</option>
+				</select>
+			</p>
+
+			<p>
+				質問：新婚旅行は行きましたか？<br /> <select name="marrytrip">
+					<option value="yes">はい</option>
+					<option value="no">いいえ</option>
+				</select>
+			</p>
+
+
+
+
+		</form>
+		<br /> <br /> <br />
+
+
+		<!-- 教育の質問リスト========================================================= -->
+		
+		<h2>２．教育について</h2>
+
+
+
+<!-- 送信ボタン /formに飛ぶ=========================================== -->
+子供は何人ほしいですか？<br />
+<!-- 表示される文章================== -->
+<ul>
+  <li><span th:text="${kodomo}">(子供の人数)</span>人です。 </li>   
+</ul>
+
+<!-- 送信ボタン　入力コマンド=============================== -->
+<form method="get" th:action="@{/form1}">
+  <input type="text" name="kodomo" placeholder="子供の数" />
+  <input type="submit" value="決定"/>
+</form>
+
+<p th:if="${kodomo = 2}">エラー</p>
+
+
+<form action="cgi-bin/aaa.cgi" method="post">
+<p>
+幼稚園に通わせるのは？<br /> 
+<select name="you">
+<option value="yoko">公立</option>
+<option value="yosi">私立</option>
+</select>
+</p>
+
+
+<p>
+小学校に通わせるのは？<br /> 
+<select name="syou">
+<option value="yes">公立</option>
+<option value="no">私立</option>
+</select>
+</p>
+
+
+<p>
+中学校に通わせるのは？<br /> 
+<select name="tyuu">
+<option value="yes">公立</option>
+<option value="no">私立</option>
+</select>
+</p>
+
+
+			<p>
+				質問：高校に通わせるのは？<br /> <select name="kou">
+					<option value="yes">公立</option>
+					<option value="no">私立</option>
+				</select>
+			</p>
+
+
+
+			<p>
+				質問：大学に通わせるのは？<br /> <select name="dai">
+					<option value="yes">国公立</option>
+					<option value="no">私立文系</option>
+					<option value="no">私立理系</option>
+				</select>
+			</p>
+
+
+
+
+		</form>
+
+		<br /> <br /> <br />
+
+<!-- =================================================家の質問リスト============================================ -->
+
+<h2>３．住宅について</h2>
+
+
+<p>
+質問：誰と暮らしてますか？<br /> <select name="sumai">
+<option value="zikka">実家暮らし</option>
+<option value="hitori">一人暮らし</option>
+<option value="dou">同棲中</option>
+</select>
+</p>
+
+
+(実家暮らしの場合)一人暮らしは何年後する予定ですか？<br />
+<!-- 送信ボタン　入力コマンド=============================== -->
+<form method="get" th:action="@{/form31}">
+  <input type="text" name="nannengo" placeholder="何年後" />
+  <input type="submit" value="決定"/>
+</form>
+<!-- 表示される文章================== -->
+<ul>
+  <li><span th:text="${nannengo}">2</span>年後です。 </li>   
+</ul>
+
+
+(一人暮らし、同棲の場合)家賃や光熱費、水道代はまとめていくらですか？<br />
+
+<!-- 送信ボタン　入力コマンド=============================== -->
+<form method="get" th:action="@{/form32}">
+  <input type="text" name="yatin" placeholder="家賃" />
+  <input type="submit" value="決定"/>
+</form>
+<!-- 表示される文章================== -->
+<ul>
+  <li><span th:text="${yatin}">2</span>円です。 </li>   
+</ul>
+
+
+マイホームを購入する場合、どれくらいの金額を想定しますか？<br />
+
+<!-- 送信ボタン　入力コマンド=============================== -->
+<form method="get" th:action="@{/form33}">
+  <input type="text" name="myhome" placeholder="家賃" />
+  <input type="submit" value="決定"/>
+</form>
+<ul>
+  <li><span th:text="${myhome}">2</span>円です。 </li>   
+</ul>
+
+
+マイホームを購入する場合、どれくらいの金額を想定しますか１？<br />
+<!-- 送信ボタン　入力コマンド=============================== -->
+<form method="get" th:action="@{/form34}">
+<p><input type="text" name="myhome1" placeholder="家賃" /></p>
+
+マイホームを購入する場合、どれくらいの金額を想定しますか２？<br />
+<p><input type="text" name="myhome2" placeholder="家賃" /></p>
+  <input type="submit" value="決定" />
+</form>
+<ul>
+  <li>1+2=<span th:text="${myhome3}">2</span>円です。 </li>   
+</ul>
+
+
+<!-- 合計金額の表示 -->
+合計は
+<ul>
+  <li><span th:text="${sum}">2</span>円です。 </li>   
+</ul>
+
+<br />
+<br />
+<br />
+
+<!-- =================================================車の質問リスト============================================ -->
+
+<h2>４．車について</h2>
+
+<p>
+自分の車を買いたい？<br /> 
+<select name="carhave">
+<option value="yes">買いたい</option>
+<option value="no">いらない</option>
+</select>
+</p>
+
+<p>
+普通車と軽自動車どっちが欲しい？<br /> 
+    <select name="carwhich">
+        <option value="yes">普通</option>
+        <option value="no">軽自動車</option>
+    </select>
+</p>
+
+
+およそいくらの本体価格の車を購入したいですか？<br />
+<!-- 送信ボタン　入力コマンド=============================================================== -->
+    <form method="get" th:action="@{/form41}">
+        <input type="text" name="carprice" placeholder="いくら" />
+        <input type="submit" value="決定"/>
+    </form>
+<!-- 表示される文章========================================================================= -->
+<ul>
+<li><span th:text="${carprice}">2</span>万円です。 </li>   
+</ul>
+
+<p>
+任意保険に入る？<br /> 
+    <select name="carinsurance">
+        <option value="yes">はい</option>
+        <option value="no">いいえ</option>
+    </select>
+</p>
+
+
+
+<a href="sisaku.html"> <br />
+試作
+</a> 
+<br /> 
+<a href="kekka.html"> <br /> 
+結果
+</a> 
+<br />
+
+</div>	
+</body>
+</html>

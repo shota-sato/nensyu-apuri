@@ -1,0 +1,27 @@
+@charset "UTF-8";
+h1 {
+	color: #cc0033;   /*文字の色を変更　#cc0033は赤*/
+    font-size: 45px;    /*文字サイズ変更*/
+}
+
+#title {
+	color: #6600ff;     /*h1内のid="title" の部分のみ変更*/
+}
+
+h2 {
+	color: #008000;     /*h2内のid="marry" の部分のみ変更*/
+}
+
+p {
+	color: #666;
+	font-size: 16px;
+}
+
+img {
+	width: 300px;   /*画像のサイズを変更*/
+	height: auto;
+}
+
+a {
+	text-decoration: none;  /*ハイパーリンクの下線を消す*/
+}
