@@ -4,29 +4,29 @@
 <meta charset="UTF-8"/>
 <link rel="stylesheet" href="style.css" />
 <title>目指せ！年収〇〇万円！</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </link>
 </head>
 <body>
-<!-- <form method="get" th:action="@{/h2}">
-  <input type="text" name="age" placeholder="年齢" />
-  <input type="submit" value="決定"/>
-</form> -->
-
-<input name="modoriti"  />
 
 
-<!-- form内において、エンターキーや、決定ボタンを押すと/h2に飛び、@GetMapping("/h2")の処理を行う　→① -->
+
+<!-- form内において、エンターキーや、決定ボタンを押すと/h2に飛び、@GetMapping("/h2")の処理を行う　→① 
 <form method="get" th:action="@{/h2}">
   <input type="text" name="num1" />
   <input type="text" name="num2" />
   <input type="text" name="num3" />
   <input type="submit" value="決定"/>
 </form>
-
-
-
-<ul>
-  <li><span th:text="${num1}">400</span>円でごわす！ </li>
-</ul>
+-->
 
 
 <h1 id="title">目指せ年収〇〇万円！</h1>
@@ -41,7 +41,11 @@
 <p>質問にお答えください</p>
 
 <p>
-性別は？<br /> 
+
+
+性別は？<br />
+
+ 
 <select name="gender">
 <option value="man">男性</option>
 <option value="woman">女性</option>
@@ -50,15 +54,36 @@
 
 <!-- 送信ボタン /formに飛ぶ=========================================== -->
 現在の年齢は？<br />
-
-<!-- 送信ボタン　入力コマンド=============================== -->
-<form method="get" th:action="@{/form}">
+<form method="post" th:action="@{/hogeage}">
   <input type="text" name="age" placeholder="年齢" />
+  <input class="btn btn-primary" type="submit" value="決定"/>
+</form>
+<!-- 表示される文章================== -->
+<form method="post" >
+<input type="text" name="age" th:value="${age}" />
+</form>
+
+現在の月収は？<br />
+<form method="post" th:action="@{/hogegessyuu}">
+  <input type="text" name="gessyuu" placeholder="月収" />
+  <input class="btn btn-success" type="submit" value="決定"/>
+</form>
+<!-- 表示される文章================== -->
+<form method="post" >
+<input type="text" name="gessyuu" th:value="${gessyuu}" />
+</form>
+
+<br />
+
+月いくら貯めれそうですか？<br />
+<form method="post" th:action="@{/hogetukityo}">
+  <input type="text" name="tukityo" placeholder="毎月の貯金" />
   <input type="submit" value="決定"/>
 </form>
 <!-- 表示される文章================== -->
-
- 
+<form method="post" >
+<input type="text" name="tukityo" th:value="${tukityo}" />
+</form>
 
 <br />
 <!-- 送信ボタン　入力コマンド　kekkaに表示=============================== -->
@@ -81,108 +106,191 @@
 <h2>１．結婚について</h2>
 <!-- 質問リスト -->
 
-<form action="cgi-bin/aaa.cgi" method="post">
-
-			<p>
-				質問：結婚してますか？<br /> <select name="marry">
+			
+		質問：結婚してますか？<br /> <select name="marry">
 					<option value="yes">はい</option>
 					<option value="no">いいえ</option>
 				</select>
-			</p>
+
+<br />
+結婚式はあげましたか？<br /> 
+<select name="marrysiki">
+<option value="yes">はい</option>
+<option value="no">いいえ</option>
+</select>
 
 
-			<p>
-				質問：結婚式はあげましたか？<br /> <select name="marrysiki">
-					<option value="yes">はい</option>
-					<option value="no">いいえ</option>
-				</select>
-			</p>
+<br />			
+結婚式はどこで行いますか？<br />
+<form method="post" th:action="@{/hoge13}">
+<select name="marryprice">
+<option value="sikire">レストラン</option>
+<option value="sikise">専門式場</option>
+<option value="sikiho">ホテル</option>
+<option value="sikige">ゲストハウス</option>
+<option value="sikino">やらない</option>
+<option value="sikisu">もうやった</option>
+</select>
+<input type="submit" value="決定"/>
+</form>
 
-			<p>
-				質問：新婚旅行は行きましたか？<br /> <select name="marrytrip">
-					<option value="yes">はい</option>
-					<option value="no">いいえ</option>
-				</select>
-			</p>
+<form method="get" >
+<input type="text" name="marryprice" th:value="${marryprice}" />
+</form>
+
+<br />          
+
+新婚旅行の費用はいくらがいいですか？<br />
+<form method="post" th:action="@{/hoge14}">
+  <input type="text" name="marrytrip" placeholder="新婚旅行の費用" />
+  <input type="submit" value="決定"/>
+</form>
+
+<form method="post" >
+<input type="text" name="marrytrip" th:value="${marrytrip}" />
+</form>
+
+
+
+<!-- 
+<form method="post" >
+<input type="text" name="marrytrip" th:value="${marrytrip}" />
+</form>
+ -->
+<a href="http://www.honeymoon-s.jp/budget.html"> <br />
+新婚旅行　参考サイト
+</a><br />
+
+
+<br />
+適当な数字を入力すると学費の合計が出るよ 
+<form method="post" th:action="@{/hoge110}">
+<input type="text" name="marrysum" th:value="${marrysum}" />
+<input type="submit" value="合計" />
+</form>
 
 
 
 
-		</form>
 		<br /> <br /> <br />
 
 
 		<!-- 教育の質問リスト========================================================= -->
-		
-		<h2>２．教育について</h2>
-
-
+<h2>２．教育について</h2>
 
 <!-- 送信ボタン /formに飛ぶ=========================================== -->
+<div id="point"></div>
 子供は何人ほしいですか？<br />
-<!-- 表示される文章================== -->
-<ul>
-  <li><span th:text="${kodomo}">(子供の人数)</span>人です。 </li>   
-</ul>
-
 <!-- 送信ボタン　入力コマンド=============================== -->
-<form method="get" th:action="@{/form1}">
-  <input type="text" name="kodomo" placeholder="子供の数" />
+<form method="post" th:action="@{/hoge21}">
+  <input type="text" name="child" placeholder="子供の数" />
   <input type="submit" value="決定"/>
 </form>
+<form method="post" >
+<input type="text" name="child" th:value="${child}" />
+</form>
 
-<p th:if="${kodomo = 2}">エラー</p>
-
-
-<form action="cgi-bin/aaa.cgi" method="post">
-<p>
+<br />
+  
 幼稚園に通わせるのは？<br /> 
+<form method="post" th:action="@{/hoge22}">
 <select name="you">
 <option value="yoko">公立</option>
 <option value="yosi">私立</option>
 </select>
-</p>
+<input type="submit" value="決定"/>
+
+</form>
+<form method="post" >
+<input type="text" name="you" th:value="${you}" />
+</form>
+<br />
 
 
-<p>
 小学校に通わせるのは？<br /> 
+<form method="post" th:action="@{/hoge23}">
 <select name="syou">
-<option value="yes">公立</option>
-<option value="no">私立</option>
+<option value="syoko">公立</option>
+<option value="syosi">私立</option>
 </select>
-</p>
+<input type="submit" value="決定"/>
+</form>
+<form method="post" >
+<input type="text" name="syou" th:value="${syou}" />
+</form>
 
 
-<p>
+<br />
 中学校に通わせるのは？<br /> 
+<form method="post" th:action="@{/hoge24}">
 <select name="tyuu">
-<option value="yes">公立</option>
-<option value="no">私立</option>
+<option value="tyuuko">公立</option>
+<option value="tyuusi">私立</option>
 </select>
-</p>
+<input type="submit" value="決定"/>
+</form>
+<form method="post" >
+<input type="text" name="tyuu" th:value="${tyuu}" />
+</form>
+
+<br />
+高校に通わせるのは？
+<form method="post" th:action="@{/hoge25}">
+<select name="kou">
+<option value="kouko">公立</option>
+<option value="kousi">私立</option>
+</select>
+<input type="submit" value="決定"/>
+</form>
+<form method="post" >
+<input type="text" name="kou" th:value="${kou}" />
+</form>
+
+<br />
+大学に通わせるのは？<br /> 
+<form method="post" th:action="@{/hoge26}">
+<select name="dai">
+<option value="daikokuzi">国公立(自宅通学)</option>
+<option value="daikokuhi">国公立(自宅外)</option>
+<option value="daisibuzi">私立文系(自宅通学)</option>
+<option value="daisibuhi">私立文系(自宅外)</option>
+<option value="daisirizi">私立理系(自宅通学)</option>
+<option value="daisirihi">私立理系(自宅外)</option>
+<option value="daisihazi">私立医歯系(自宅通学)</option>
+<option value="daisihahi">私立医歯系(自宅外)</option>
+<option value="daino">通わせない</option>
+</select>
+<input type="submit" value="決定"/>
+</form>
+<form method="post" >
+<input type="text" name="dai" th:value="${dai}" />
+</form>
 
 
-			<p>
-				質問：高校に通わせるのは？<br /> <select name="kou">
-					<option value="yes">公立</option>
-					<option value="no">私立</option>
-				</select>
-			</p>
+<br />
+大学院に通わせるのは？<br /> 
+<form method="post" th:action="@{/hoge27}">
+<select name="in">
+<option value="inkoku">国公立</option>
+<option value="insibu">私立文系</option>
+<option value="insiri">私立理系</option>
+<option value="insiha">私立医歯系</option>
+<option value="inno">通わせない</option>
+</select>
+<input type="submit" value="決定"/>
+</form>
+<form method="post" >
+<input type="text" name="in" th:value="${in}" />
+</form>
+
+<br />
+適当な数字を入力すると学費の合計が出るよ 
+<form method="post" th:action="@{/hoge210}">
+<input type="text" name="gakusum" th:value="${gakusum}" />
+<input type="submit" value="合計" />
+</form>
 
 
-
-			<p>
-				質問：大学に通わせるのは？<br /> <select name="dai">
-					<option value="yes">国公立</option>
-					<option value="no">私立文系</option>
-					<option value="no">私立理系</option>
-				</select>
-			</p>
-
-
-
-
-		</form>
 
 		<br /> <br /> <br />
 
@@ -190,14 +298,6 @@
 
 <h2>３．住宅について</h2>
 
-
-<p>
-質問：誰と暮らしてますか？<br /> <select name="sumai">
-<option value="zikka">実家暮らし</option>
-<option value="hitori">一人暮らし</option>
-<option value="dou">同棲中</option>
-</select>
-</p>
 
 
 (実家暮らしの場合)一人暮らしは何年後する予定ですか？<br />
@@ -207,9 +307,9 @@
   <input type="submit" value="決定"/>
 </form>
 <!-- 表示される文章================== -->
-<ul>
-  <li><span th:text="${nannengo}">2</span>年後です。 </li>   
-</ul>
+<form method="get" >
+<input type="text" name="nannengo" th:value="${nannengo}" />
+</form>
 
 
 (一人暮らし、同棲の場合)家賃や光熱費、水道代はまとめていくらですか？<br />
@@ -220,10 +320,9 @@
   <input type="submit" value="決定"/>
 </form>
 <!-- 表示される文章================== -->
-<ul>
-  <li><span th:text="${yatin}">2</span>円です。 </li>   
-</ul>
-
+<form method="get" >
+<input type="text" name="yatin" th:value="${yatin}" />
+</form>
 
 マイホームを購入する場合、どれくらいの金額を想定しますか？<br />
 
@@ -232,9 +331,18 @@
   <input type="text" name="myhome" placeholder="家賃" />
   <input type="submit" value="決定"/>
 </form>
-<ul>
-  <li><span th:text="${myhome}">2</span>円です。 </li>   
-</ul>
+<!-- 表示される文章================== -->
+<form method="get" >
+<input type="text" name="myhome" th:value="${myhome}" />
+</form>
+
+
+
+適当な数字を入力すると合計家賃が出るよ 
+<form method="get" th:action="@{/form310}">
+<input type="text" name="sum" th:value="${sum}" />
+<input type="submit" value="合計"/>
+</form>
 
 
 <!-- マイホームを購入する場合、どれくらいの金額を想定しますか１？ --><br />
@@ -251,11 +359,6 @@
 </ul>
 -->
 
-<!-- 合計金額の表示 -->
-合計は
-<ul>
-  <li><span th:text="${sum}">2</span>円です。 </li>   
-</ul>
 
 <br />
 <br />
@@ -265,52 +368,50 @@
 
 <h2>４．車について</h2>
 
-<p>
-自分の車を買いたい？<br /> 
-<select name="carhave">
-<option value="yes">買いたい</option>
-<option value="no">いらない</option>
-</select>
-</p>
 
-<p>
-普通車と軽自動車どっちが欲しい？<br /> 
-    <select name="carwhich">
-        <option value="yes">普通</option>
-        <option value="no">軽自動車</option>
-    </select>
-</p>
-
-
-およそいくらの本体価格の車を購入したいですか？<br />
+およそいくらの本体価格の車を購入したいですか？(購入したくない場合は0を入力)<br />
 <!-- 送信ボタン　入力コマンド=============================================================== -->
-    <form method="get" th:action="@{/form41}">
-        <input type="text" name="carprice" placeholder="いくら" />
-        <input type="submit" value="決定"/>
-    </form>
+<form method="get" th:action="@{/form41}">
+<input type="text" name="carprice" placeholder="いくら" />
+<input type="submit" value="決定"/>
+</form>
 <!-- 表示される文章========================================================================= -->
-<ul>
-<li><span th:text="${carprice}">2</span>万円です。 </li>   
-</ul>
+<form method="get" >
+<input type="text" name="carprice" th:value="${carprice}" />
+</form>
 
-<p>
+
 任意保険に入る？<br /> 
     <select name="carinsurance">
         <option value="yes">はい</option>
         <option value="no">いいえ</option>
     </select>
-</p>
-
 
 
 <a href="sisaku.html"> <br />
 試作
 </a> 
 <br /> 
+
+
+
+現在の年収と今月分の給料は？<br />
+<form method="get" th:action="@{/kekka1}">
+  <input type="text" name="nensyu" placeholder="年収" />
+  <input type="text" name="kyuryo" placeholder="給料" />
+  <input type="submit" value="決定"/>
+</form>
+
 <a href="kekka.html"> <br /> 
 結果
 </a> 
 <br />
+<form method="post" th:action="@{/hoge1000}">
+  <input type="text" name="totalsum" placeholder="1を入力して" />
+  <input type="submit" value="決定"/>
+</form>
+
+
 
 <a href="kakunin.html"> <br /> 
 確認
@@ -318,5 +419,10 @@
 <br />
 
 </div>	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

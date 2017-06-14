@@ -8,14 +8,26 @@
 
 
 <center>
-<h1 id="title">あなたの年収は・・・</h1>
+<h1 id="title">かかる費用の総計は・・・</h1>
 
-<ul>
-  <li><span th:text="${nensyu}">400</span><h1 id="title">万円です！</h1> </li>
-</ul>
+<!--  
+<span th:text="${nensyu}">400</span><h1 id="title">万円です！</h1> </li>
+とりあえず新婚旅行の費用を結果に表示-->
+
+
+<form method="post" >
+<input type="text" name="totalsum" th:value="${totalsum}" />
+</form>
+<h1 id="title">です</h1>
 
 
 
+<br />
+理想の年収は・・・ 
+<form method="post" th:action="@{/hoge2000}">
+<input type="text" name="risou" th:value="${risou}" />
+<input type="submit" value="合計" />
+</form>
 
 <img src="kuruma.gif" />
 
