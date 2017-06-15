@@ -18,18 +18,29 @@
 <body>
 
 
-
-<!-- form内において、エンターキーや、決定ボタンを押すと/h2に飛び、@GetMapping("/h2")の処理を行う　→① 
-<form method="get" th:action="@{/h2}">
-  <input type="text" name="num1" />
-  <input type="text" name="num2" />
-  <input type="text" name="num3" />
-  <input type="submit" value="決定"/>
-</form>
--->
-
-
 <h1 id="title">目指せ年収〇〇万円！</h1>
+
+<!-- 座標をHTMLに出力し、その値を読み取りコントローラーで移動　Javascript -->
+<input id="move" type="hidden" th:value="${movePoint}" />
+<script th:inline="javascript">
+/*<![CDATA[*/
+window.onload = function(){
+    // 要素の位置を取得する
+    var movePoint = document.getElementById("move").value;
+    if(movePoint != ""){
+            var element = document.getElementById( movePoint ) ;
+            var rect = element.getBoundingClientRect() ;
+            var positionX = rect.left + window.pageXOffset ;    // 要素のX座標
+            var positionY = rect.top + window.pageYOffset ; // 要素のY座標
+
+    // 要素の位置にスクロールさせる
+           window.scrollTo( positionX, positionY ) ;
+    }
+}
+/*]]>*/
+</script>
+
+
 
 
 
@@ -40,8 +51,6 @@
 
 <p>質問にお答えください</p>
 
-<p>
-
 
 性別は？<br />
 
@@ -50,51 +59,64 @@
 <option value="man">男性</option>
 <option value="woman">女性</option>
 </select>
-</p>
 
-<!-- 送信ボタン /formに飛ぶ=========================================== -->
+<br />
+<!-- 送信ボタン /formに飛ぶ=========================================== 
 現在の年齢は？<br />
 <form method="post" th:action="@{/hogeage}">
   <input type="text" name="age" placeholder="年齢" />
   <input class="btn btn-primary" type="submit" value="決定"/>
 </form>
-<!-- 表示される文章================== -->
+
 <form method="post" >
 <input type="text" name="age" th:value="${age}" />
 </form>
-
+<br />
 現在の月収は？<br />
 <form method="post" th:action="@{/hogegessyuu}">
   <input type="text" name="gessyuu" placeholder="月収" />
-  <input class="btn btn-success" type="submit" value="決定"/>
+  <input class="btn btn-primary" type="submit" value="決定"/>
 </form>
-<!-- 表示される文章================== -->
+
 <form method="post" >
 <input type="text" name="gessyuu" th:value="${gessyuu}" />
 </form>
 
 <br />
-
 月いくら貯めれそうですか？<br />
 <form method="post" th:action="@{/hogetukityo}">
   <input type="text" name="tukityo" placeholder="毎月の貯金" />
-  <input type="submit" value="決定"/>
+  <input class="btn btn-primary" type="submit" value="決定"/>
 </form>
-<!-- 表示される文章================== -->
+
 <form method="post" >
 <input type="text" name="tukityo" th:value="${tukityo}" />
 </form>
 
+-->
+現在の年齢は？<br />
+<form method="post" th:action="@{/hogeinfo}">
+  <input type="text" name="age" placeholder="年齢" />
+<br />
+現在の月収は？<br />
+  <input type="text" name="gessyuu" placeholder="月収" />
+<br />
+月いくら貯めれそうですか？<br />
+  <input type="text" name="tukityo" placeholder="毎月の貯金" /> 
+<br />  
+  <input class="btn btn-primary" type="submit" value="決定"/>
+</form>
+
+<form method="post" >
+<input type="text" name="age" th:value="${age}" />
+<input type="text" name="gessyuu" th:value="${gessyuu}" />
+<input type="text" name="tukityo" th:value="${tukityo}" />
+</form>
+
+
+
 <br />
 <!-- 送信ボタン　入力コマンド　kekkaに表示=============================== -->
-
-
-現在の年収と今月分の給料は？<br />
-<form method="get" th:action="@{/kekka1}">
-  <input type="text" name="nensyu" placeholder="年収" />
-  <input type="text" name="kyuryo" placeholder="給料" />
-  <input type="submit" value="決定"/>
-</form>
 
 <br />
 <br />
@@ -103,6 +125,8 @@
 
 <!-- 結婚の質問リスト＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
 
+
+<div id="marriage"></div>
 <h2>１．結婚について</h2>
 <!-- 質問リスト -->
 
@@ -120,9 +144,10 @@
 </select>
 
 
-<br />			
+<br />
+
 結婚式はどこで行いますか？<br />
-<form method="post" th:action="@{/hoge13}">
+<form method="post" th:action="@{/hogemarry}">
 <select name="marryprice">
 <option value="sikire">レストラン</option>
 <option value="sikise">専門式場</option>
@@ -131,124 +156,71 @@
 <option value="sikino">やらない</option>
 <option value="sikisu">もうやった</option>
 </select>
-<input type="submit" value="決定"/>
-</form>
-
-<form method="get" >
-<input type="text" name="marryprice" th:value="${marryprice}" />
-</form>
 
 <br />          
-
 新婚旅行の費用はいくらがいいですか？<br />
-<form method="post" th:action="@{/hoge14}">
   <input type="text" name="marrytrip" placeholder="新婚旅行の費用" />
-  <input type="submit" value="決定"/>
+  
+  <br />
+  <input class="btn btn-danger" type="submit" value="決定"/>
 </form>
 
-<form method="post" >
-<input type="text" name="marrytrip" th:value="${marrytrip}" />
-</form>
 
 
-
-<!-- 
-<form method="post" >
-<input type="text" name="marrytrip" th:value="${marrytrip}" />
-</form>
- -->
 <a href="http://www.honeymoon-s.jp/budget.html"> <br />
 新婚旅行　参考サイト
 </a><br />
 
-
+<input type="text" name="marryprice" th:value="${marryprice}" />
+<input type="text" name="marrytrip" th:value="${marrytrip}" />
 <br />
-適当な数字を入力すると学費の合計が出るよ 
-<form method="post" th:action="@{/hoge110}">
 <input type="text" name="marrysum" th:value="${marrysum}" />
-<input type="submit" value="合計" />
-</form>
-
-
 
 
 		<br /> <br /> <br />
 
 
+<div id="education"></div>
 		<!-- 教育の質問リスト========================================================= -->
 <h2>２．教育について</h2>
 
-<!-- 送信ボタン /formに飛ぶ=========================================== -->
 <div id="point"></div>
-子供は何人ほしいですか？<br />
-<!-- 送信ボタン　入力コマンド=============================== -->
-<form method="post" th:action="@{/hoge21}">
-  <input type="text" name="child" placeholder="子供の数" />
-  <input type="submit" value="決定"/>
-</form>
-<form method="post" >
-<input type="text" name="child" th:value="${child}" />
-</form>
 
+
+<form method="post" th:action="@{/hogegaku}">
+子供は何人ほしいですか？<br />
+  <input type="text" name="child" placeholder="子供の数" />
 <br />
-  
-幼稚園に通わせるのは？<br /> 
-<form method="post" th:action="@{/hoge22}">
+
+幼稚園に通わせるのは？<br />
 <select name="you">
 <option value="yoko">公立</option>
 <option value="yosi">私立</option>
 </select>
-<input type="submit" value="決定"/>
-
-</form>
-<form method="post" >
-<input type="text" name="you" th:value="${you}" />
-</form>
 <br />
 
-
-小学校に通わせるのは？<br /> 
-<form method="post" th:action="@{/hoge23}">
+小学校に通わせるのは？<br />
 <select name="syou">
 <option value="syoko">公立</option>
 <option value="syosi">私立</option>
 </select>
-<input type="submit" value="決定"/>
-</form>
-<form method="post" >
-<input type="text" name="syou" th:value="${syou}" />
-</form>
-
-
 <br />
+
 中学校に通わせるのは？<br /> 
-<form method="post" th:action="@{/hoge24}">
 <select name="tyuu">
 <option value="tyuuko">公立</option>
 <option value="tyuusi">私立</option>
 </select>
-<input type="submit" value="決定"/>
-</form>
-<form method="post" >
-<input type="text" name="tyuu" th:value="${tyuu}" />
-</form>
 
 <br />
-高校に通わせるのは？
-<form method="post" th:action="@{/hoge25}">
+高校に通わせるのは？<br />
 <select name="kou">
 <option value="kouko">公立</option>
 <option value="kousi">私立</option>
 </select>
-<input type="submit" value="決定"/>
-</form>
-<form method="post" >
-<input type="text" name="kou" th:value="${kou}" />
-</form>
 
 <br />
 大学に通わせるのは？<br /> 
-<form method="post" th:action="@{/hoge26}">
 <select name="dai">
 <option value="daikokuzi">国公立(自宅通学)</option>
 <option value="daikokuhi">国公立(自宅外)</option>
@@ -260,16 +232,9 @@
 <option value="daisihahi">私立医歯系(自宅外)</option>
 <option value="daino">通わせない</option>
 </select>
-<input type="submit" value="決定"/>
-</form>
-<form method="post" >
-<input type="text" name="dai" th:value="${dai}" />
-</form>
-
 
 <br />
 大学院に通わせるのは？<br /> 
-<form method="post" th:action="@{/hoge27}">
 <select name="in">
 <option value="inkoku">国公立</option>
 <option value="insibu">私立文系</option>
@@ -277,25 +242,27 @@
 <option value="insiha">私立医歯系</option>
 <option value="inno">通わせない</option>
 </select>
-<input type="submit" value="決定"/>
-</form>
-<form method="post" >
-<input type="text" name="in" th:value="${in}" />
-</form>
 
 <br />
-適当な数字を入力すると学費の合計が出るよ 
-<form method="post" th:action="@{/hoge210}">
-<input type="text" name="gakusum" th:value="${gakusum}" />
-<input type="submit" value="合計" />
+<input class="btn btn-success" type="submit" value="決定"/>
 </form>
+
+<input type="text" name="child" th:value="${child}" />
+<input type="text" name="you" th:value="${you}" />
+<input type="text" name="syou" th:value="${syou}" />
+<input type="text" name="tyuu" th:value="${tyuu}" />
+<input type="text" name="kou" th:value="${kou}" />
+<input type="text" name="dai" th:value="${dai}" />
+<input type="text" name="in" th:value="${in}" />
+<br />
+<input type="text" name="gakusum" th:value="${gakusum}" />
 
 
 
 		<br /> <br /> <br />
 
 <!-- =================================================家の質問リスト============================================ -->
-
+<div id="house"></div>
 <h2>３．住宅について</h2>
 
 
@@ -327,37 +294,24 @@
 マイホームを購入する場合、どれくらいの金額を想定しますか？<br />
 
 <!-- 送信ボタン　入力コマンド=============================== -->
-<form method="get" th:action="@{/form33}">
+<form method="post" th:action="@{/hoge33}">
   <input type="text" name="myhome" placeholder="家賃" />
-  <input type="submit" value="決定"/>
+  <input class="btn btn-warning" type="submit" value="決定"/>
 </form>
 <!-- 表示される文章================== -->
-<form method="get" >
+<form method="post" >
 <input type="text" name="myhome" th:value="${myhome}" />
 </form>
+
+<br />
 
 
 
 適当な数字を入力すると合計家賃が出るよ 
-<form method="get" th:action="@{/form310}">
-<input type="text" name="sum" th:value="${sum}" />
-<input type="submit" value="合計"/>
+<form method="post" th:action="@{/hoge310}">
+<input type="text" name="housesum" th:value="${housesum}" />
+<input class="btn btn-warning" type="submit" value="合計" />
 </form>
-
-
-<!-- マイホームを購入する場合、どれくらいの金額を想定しますか１？ --><br />
-<!-- 送信ボタン　入力コマンド=============================== -->
-<!-- <form method="get" th:action="@{/form34}">
-<p><input type="text" name="myhome1" placeholder="家賃" /></p>
-
-マイホームを購入する場合、どれくらいの金額を想定しますか２？<br />
-<p><input type="text" name="myhome2" placeholder="家賃" /></p>
-  <input type="submit" value="決定" />
-</form>
-<ul>
-  <li>1+2=<span th:text="${myhome3}">2</span>円です。 </li>   
-</ul>
--->
 
 
 <br />
@@ -395,12 +349,6 @@
 
 
 
-現在の年収と今月分の給料は？<br />
-<form method="get" th:action="@{/kekka1}">
-  <input type="text" name="nensyu" placeholder="年収" />
-  <input type="text" name="kyuryo" placeholder="給料" />
-  <input type="submit" value="決定"/>
-</form>
 
 <a href="kekka.html"> <br /> 
 結果
