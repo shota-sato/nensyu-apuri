@@ -15,12 +15,11 @@ public class KeisanDao {
     
     public List<Map<String,Object>>findAll(){
         
-        return jdbc.queryForList("select * from person");
-        
+        return jdbc.queryForList("select * from person");        
     }
     
     public List<Map<String,Object>>findByAge(int age){
         
-        return jdbc.queryForList("select * from person where age=?",age);
+        return jdbc.queryForList("select * from person where age=?",20);
     }
 }
