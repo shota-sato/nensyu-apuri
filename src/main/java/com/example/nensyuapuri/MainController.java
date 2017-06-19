@@ -253,54 +253,46 @@ public class MainController {
         attr.addFlashAttribute("yatin", (int)person.get("yatin"));
         attr.addFlashAttribute("housesum", (int)person.get("housesum"));
 
-        attr.addFlashAttribute("movePoint", "house");
+        attr.addFlashAttribute("movePoint", "car");
         System.out.println(jdbc.queryForList("SELECT * FROM person"));
         return "redirect:/index";
     }
    
  
-    
-    
-
-    
-//テキスト質問4-1  carprice  
-   @GetMapping("/form41")
-    public String carpricedisplay(int carprice, Model model) {
-        // 一行目のchildをupdate
-        jdbc.update("UPDATE person SET carprice = ?", carprice);
-        System.out.println(jdbc.queryForList("SELECT * FROM person"));
-        //personのchild(get(0))を取得
-        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
-        // 取得したageをhtmlに表示　to model
-        model.addAttribute("carprice", person.get("carprice"));
-
-        return "index"; //kakuninn だと飛ぶ　結果も表示される
-    }
-
-   @PostMapping("/hoge410")
-   public String carsumdisplay(int carsum, RedirectAttributes attr) {
+      
+   @PostMapping("/hogecar")
+   public String cardisplay(String syasyu, int carprice, RedirectAttributes attr) {
+       
+       if(syasyu.equals("kei")){
+           jdbc.update("UPDATE person SET syasyu = 33"); 
+       }else if(syasyu.equals("kogata")){
+           jdbc.update("UPDATE person SET syasyu = 41");  
+       }else if(syasyu.equals("hutuu")){
+           jdbc.update("UPDATE person SET syasyu = 46");  
+       }
+       jdbc.update("UPDATE person SET carprice = ?", carprice);
+              
        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
-       jdbc.update("UPDATE person SET carsum = ?", (int)person.get("carprice"));
+       jdbc.update("UPDATE person SET carsum = ?", (int)person.get("syasyu")+(int)person.get("carprice"));
+
        person = jdbc.queryForList("SELECT * FROM person").get(0);
+       attr.addFlashAttribute("syasyu", (int)person.get("syasyu"));
+       attr.addFlashAttribute("carprice", (int)person.get("carprice"));
        attr.addFlashAttribute("carsum", (int)person.get("carsum"));
+
        attr.addFlashAttribute("movePoint", "car");
        System.out.println(jdbc.queryForList("SELECT * FROM person"));
        return "redirect:/index";
    }
-   
+  
    
    
    
     
     //kekkaにnensyu+kyuryo=moneyを設定
- @GetMapping("/form100")
-            public String sumdisplay(int yatin, int myhome, Model model) {
-                sum = yatin + myhome;
-            return "index";
-            }
-        
+
  @PostMapping("/hoge1000")
-     public String totalsumdisplay(int totalsum, RedirectAttributes attr){
+     public String totalsumdisplay(RedirectAttributes attr){
          Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
          jdbc.update("UPDATE person SET totalsum = ?", (int)person.get("carsum")+(int)person.get("housesum")+(int)person.get("marrysum")+(int)person.get("gakusum"));
          person = jdbc.queryForList("SELECT * FROM person").get(0);
@@ -310,22 +302,50 @@ public class MainController {
      }
  
  @PostMapping("/hoge2000")
-     public String risoudisplay(int risou, RedirectAttributes attr){
+     public String risoudisplay(RedirectAttributes attr){
          Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
+         
+         attr.addFlashAttribute("totalsum", (int)person.get("totalsum"));
+         
          jdbc.update("UPDATE person SET risou = ?", ((((int)person.get("totalsum")/(65-(int)person.get("age")))/12-(int)person.get("tukityo"))+(int)person.get("gessyuu"))*12);
          person = jdbc.queryForList("SELECT * FROM person").get(0);
          attr.addFlashAttribute("risou", (int)person.get("risou"));
          System.out.println(jdbc.queryForList("SELECT * FROM person"));
      return "redirect:/kekka";
  }
- 
+ @PostMapping("/hoge3000")
+ public String syousaidisplay(RedirectAttributes attr){
+     Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
+     
+     attr.addFlashAttribute("age", (int)person.get("age"));
+     attr.addFlashAttribute("tukityo", (int)person.get("tukityo"));
+     attr.addFlashAttribute("gessyuu", (int)person.get("gessyuu"));
+     attr.addFlashAttribute("marryprice", (int)person.get("marryprice"));
+     attr.addFlashAttribute("marrytrip", (int)person.get("marrytrip"));
+     attr.addFlashAttribute("child", (int)person.get("child"));
+     attr.addFlashAttribute("you", (int)person.get("you"));
+     attr.addFlashAttribute("syou", (int)person.get("syou"));
+     attr.addFlashAttribute("tyuu", (int)person.get("tyuu"));
+     attr.addFlashAttribute("kou", (int)person.get("kou"));
+     attr.addFlashAttribute("dai", (int)person.get("dai"));
+     attr.addFlashAttribute("in", (int)person.get("in"));
+     attr.addFlashAttribute("yatin", (int)person.get("yatin"));
+     attr.addFlashAttribute("myhome", (int)person.get("myhome"));
+     attr.addFlashAttribute("syasyu", (int)person.get("syasyu"));
+     attr.addFlashAttribute("carprice", (int)person.get("carprice"));
+     
+
+     
+     System.out.println(jdbc.queryForList("SELECT * FROM person"));
+ return "redirect:/kekka";
+}
  @Autowired
  private KeisanDao keisanDao;
 
     @GetMapping("/test")
     public String test(){
          System.out.println(keisanDao.findAll());
-         System.out.println(keisanDao.findByAge(20));
+//         System.out.println(keisanDao.findByAge(20));
          return "";
     }
     

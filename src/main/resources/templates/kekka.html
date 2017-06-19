@@ -3,24 +3,84 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="style.css" />
 <title>あなたの年収</title>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </link>
+
+
+   <style>
+      @media (min-width: 768px) {
+        .container {
+          max-width: 730px;
+        }
+      }
+    </style>
+
 </head>
 <body>
 
 
-<center>
+<div align="center">
 <h1 id="title">かかる費用の総計は・・・</h1>
 
 
 
 <form method="post" >
-<input type="text" name="totalsum" th:value="${totalsum}" />
+<h1><span name="totalsum" th:text="${totalsum}">そうけい</span>万円です</h1>
 </form>
 <h1 id="title">です</h1>
 <br />
 <h1 id="title">理想の年収は・・・</h1> 
 <form method="post" th:action="@{/hoge2000}">
-<input type="text" name="risou" th:value="${risou}" />
-<input type="submit" value="年収" />
+<div class="container">
+<div class="form-group">
+<div class="row">
+<input type="submit" class="btn btn-primary" value="年収表示" />
+<h1><span name="risou" th:text="${risou}">年収</span>万円です！</h1>
+</div>
+</div>
+</div>
+</form>
+
+
+<form method="post" th:action="@{/hoge3000}">
+<div class="container">
+<div class="form-group">
+<div class="row">
+<input type="submit" class="btn btn-primary" value="詳細" />
+<br />
+現在の年齢：<span name="age" th:text="${age}">ねんれい</span>歳<br />
+現在の月収：<span name="gessyuu" th:text="${gessyuu}">げっしゅう</span>万円<br />
+現在の毎月の貯金：<span name="tukityo" th:text="${tukityo}">ちょきん</span>万円<br />
+結婚式にかかる費用：<span name="marryprice" th:text="${marryprice}">けっこんしき</span>万円<br />
+新婚旅行にかかる費用：<span name="marrytrip" th:text="${marrytrip}">りょこう</span>万円<br />
+子供の数：<span name="child" th:text="${child}">こども</span>人<br />
+幼稚園の学費（３年間）：<span name="you" th:text="${you}">よう</span>万円<br />
+小学校の学費（６年間）：<span name="syou" th:text="${syou}">しょう</span>万円<br />
+中学校の学費（３年間）：<span name="tyuu" th:text="${tyuu}">ちゅう</span>万円<br />
+高校の学費（３年間）：<span name="kou" th:text="${kou}">こう</span>万円<br />
+大学の学費（３年間）：<span name="dai" th:text="${dai}">だい</span>万円<br />
+大学院の学費（２年間）：<span name="in" th:text="${in}">いん</span>万円<br />
+月の家賃、水道光熱費：<span name="yatin" th:text="${yatin}">やちん</span>万円<br />
+マイホームの額：<span name="myhome" th:text="${myhome}">まいほーむ</span>万円<br />
+車の維持費：<span name="syasyu" th:text="${syasyu}">いじひ</span>万円<br />
+車の値段：<span name="carprice" th:text="${carprice}">くるま</span>万円<br />
+
+
+
+
+</div>
+</div>
+</div>
 </form>
 
 <img src="kuruma.gif" />
@@ -34,6 +94,12 @@
 </a>
 <br />
 
-</center>
+</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -76,15 +76,22 @@ window.onload = function(){
 <br />
 
 <h3>現在の年齢は？</h3><br />
-  <input type="number" name="age" placeholder="年齢" />
+<div class="form-group">
+<div class="row">
+
+  <input type="number" name="age" class="form-control" style="width:200px" min="0" placeholder="年齢" />
 <br />
 <h3>現在の月収は何万円ですか？</h3>（例：２０万円→20と入力）<br />
-  <input type="number" name="gessyuu" placeholder="月収" />
+  <input type="number" name="gessyuu" class="form-control" style="width:200px" min="0" placeholder="月収" />
+
+
 <br />
 <h3>月いくら貯めれそうですか？</h3><br />
-  <input type="number" name="tukityo" placeholder="毎月の貯金" /> 
+  <input type="number" name="tukityo" class="form-control" style="width:200px" min="0" placeholder="毎月の貯金" /> 
 <br />  
   <input class="btn btn-primary" type="submit" value="決定"/>
+</div>
+</div>
 </form>
 
 <form method="post" >
@@ -96,8 +103,6 @@ window.onload = function(){
 
 
 <br />
-<!-- 送信ボタン　入力コマンド　kekkaに表示=============================== -->
-
 <br />
 <br />
 <!-- 点線枠でくくって、背景クリーム色 -->
@@ -122,11 +127,15 @@ window.onload = function(){
 </select>
 </div>
 
-<br />          
+<br />
+<div class="form-group">
+<div class="row">
+          
 <h3>新婚旅行の費用はいくらがいいですか？</h3><br />
-  <input type="number" name="marrytrip" placeholder="新婚旅行の費用" />  
+  <input type="number" name="marrytrip" class="form-control" style="width:200px" min="0" placeholder="新婚旅行の費用" />  
   <br />
-  
+</div>
+</div>  
   <a href="http://www.honeymoon-s.jp/budget.html"> <br />
 新婚旅行　参考サイト
   </a>
@@ -153,10 +162,13 @@ window.onload = function(){
 
 
 <form method="post" th:action="@{/hogegaku}">
+<div class="form-group">
+<div class="row">
 <h3>子供は何人ほしいですか？</h3><br />
-  <input type="number" name="child" placeholder="子供の数" />
+  <input type="number" name="child" class="form-control" style="width:200px" min="0" placeholder="子供の数" />
 <br />
-
+</div>
+</div>
 <h3>幼稚園に通わせるのは？</h3><br />
 <div class="form-group">
 <select class="form-control" style="width:200px" name="you" >
@@ -253,15 +265,18 @@ window.onload = function(){
 
 
 <form method="post" th:action="@{/hogehouse}">
+<div class="form-group">
+<div class="row">
 <h3>(一人暮らし、同棲の場合)月の家賃、光熱費、水道代はまとめていくらですか？</h3><br />
-<input type="number" name="yatin" placeholder="生活費" />
+<input type="number" name="yatin" class="form-control" style="width:200px" min="0" placeholder="生活費" />
 
 
 
 <h3>マイホームを購入する場合、どれくらいの金額を想定しますか？（購入予定がない場合、残りの住宅ローン額を入力）</h3><br />
-<input type="text" name="myhome" placeholder="家賃" />
+<input type="text" name="myhome" class="form-control" style="width:200px" min="0" placeholder="家賃" />
 
-
+</div>
+</div>
 <br />
 
 <a href="http://ie-daiku.org/saisin-souba.html"> <br /> 
@@ -289,34 +304,43 @@ window.onload = function(){
 <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #EDF7FF;">
 
 <h2>４．車について</h2>
+<form method="post" th:action="@{/hogecar}">
 
-<h3>およそいくらの本体価格の車を購入したいですか？(購入したくない場合は0を入力)</h3><br />
-<form method="get" th:action="@{/form41}">
-<input type="text" name="carprice" placeholder="いくら" />
-<input type="submit" value="決定"/>
-</form>
+
+<h3>どの車種が欲しいですか？</h3><br />
+<div class="form-group">
+<div class="row">
+<select class="form-control" style="width:200px" name="syasyu" >
+<option value="kei">軽自動車</option>
+<option value="kogata">小型乗用車</option>
+<option value="hutuu">普通乗用車</option>
+</select>
+</div>
+</div>
 
 <a href="http://www.goo-net.com/market/index.html"> <br /> 
 車購入　参考サイト
 </a> 
+<h3>およそいくらの本体価格の車を購入したいですか？(購入したくない場合は0を入力)</h3><br />
 
-<form method="get" >
+<div class="form-group">
+<div class="row">
+
+<input type="number" name="carprice" class="form-control" style="width:200px" min="0" placeholder="車の値段" />  
+  <br />
+
+<input class="btn btn-info" type="submit" value="決定"/>
+</div>
+</div>
+</form>
+
+<form method="post" >
+<input type="text" name="syasyu" th:value="${syasyu}" />
 <input type="text" name="carprice" th:value="${carprice}" />
-</form>
-
-
-任意保険に入る？<br /> 
-    <select name="carinsurance">
-        <option value="yes">はい</option>
-        <option value="no">いいえ</option>
-    </select>
-
-
-適当な数字を入力すると合計家賃が出るよ 
-<form method="post" th:action="@{/hoge410}">
+<br />
 <input type="text" name="carsum" th:value="${carsum}" />
-<input class="btn btn-info" type="submit" value="合計" />
 </form>
+
 
 
 
@@ -333,9 +357,10 @@ window.onload = function(){
 </a> 
 <br />
 <form method="post" th:action="@{/hoge1000}">
-  <input type="text" name="totalsum" placeholder="1を入力して" />
-  <input type="submit" value="決定"/>
+  <input type="submit" class="btn btn-primary" name="totalsum" value="総計表示"/>
 </form>
+
+
 
 
 <a href="kakunin.html"> <br /> 
