@@ -77,16 +77,21 @@ public class MainController {
         } else if(form.getGender().equals("woman")){
             jdbc.update("UPDATE person SET endage = 87");  
         }
+        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
         
         jdbc.update("UPDATE person SET age = ?", form.getAge());
         jdbc.update("UPDATE person SET gessyuu = ?", form.getGessyuu());
         jdbc.update("UPDATE person SET tukityo = ?", form.getTukityo());
-
+        
         System.out.println(jdbc.queryForList("SELECT * FROM person"));
-        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
+        person = jdbc.queryForList("SELECT * FROM person").get(0);
         attr.addFlashAttribute("age", person.get("age"));
         attr.addFlashAttribute("gessyuu", person.get("gessyuu"));
         attr.addFlashAttribute("tukityo", person.get("tukityo"));
+        
+        if(person.get("age").equals(null) || person.get("gessyuu").equals(null) || person.get("tukityo").equals(null)){
+            attr.addFlashAttribute("error", ("入力して"));
+        }
         attr.addFlashAttribute("movePoint", "marriage");
         return "redirect:/index";
     }
@@ -240,7 +245,7 @@ public class MainController {
 //テキスト質問3-3  myhome  
     @PostMapping("/hogehouse")
     public String housedisplay(int yatin, int myhome, RedirectAttributes attr) {
-        // 一行目のchildをupdate
+        
         jdbc.update("UPDATE person SET yatin = ?", yatin);
         jdbc.update("UPDATE person SET myhome = ?", myhome);
         
@@ -253,8 +258,11 @@ public class MainController {
         attr.addFlashAttribute("yatin", (int)person.get("yatin"));
         attr.addFlashAttribute("housesum", (int)person.get("housesum"));
 
+
+        
         attr.addFlashAttribute("movePoint", "car");
         System.out.println(jdbc.queryForList("SELECT * FROM person"));
+
         return "redirect:/index";
     }
    
@@ -269,6 +277,8 @@ public class MainController {
            jdbc.update("UPDATE person SET syasyu = 41");  
        }else if(syasyu.equals("hutuu")){
            jdbc.update("UPDATE person SET syasyu = 46");  
+       }else if(syasyu.equals("nocar")){
+           jdbc.update("UPDATE person SET syasyu = 0");  
        }
        jdbc.update("UPDATE person SET carprice = ?", carprice);
               

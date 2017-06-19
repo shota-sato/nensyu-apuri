@@ -50,113 +50,112 @@ window.onload = function(){
 </script>
 
 
-
-
-
-<!-- 画像の貼り付け -->
-<img src="kuruma.gif" /> 
-<img src="ie.gif" />
-<img src="marry.png" />
-
-<p>質問にお答えください</p>
-
-
-
-
-<form method="post" th:action="@{/hogeinfo}">
-
-<h3>性別は？</h3><br />
-<div class="form-group">
-<select class="form-control" style="width:200px" name="gender" >
-<option value="man">男性</option>
-<option value="woman">女性</option>
-</select>
-</div>
-
-<br />
-
-<h3>現在の年齢は？</h3><br />
-<div class="form-group">
 <div class="row">
-
-  <input type="number" name="age" class="form-control" style="width:200px" min="0" placeholder="年齢" />
-<br />
-<h3>現在の月収は何万円ですか？</h3>（例：２０万円→20と入力）<br />
-  <input type="number" name="gessyuu" class="form-control" style="width:200px" min="0" placeholder="月収" />
-
-
-<br />
-<h3>月いくら貯めれそうですか？</h3><br />
-  <input type="number" name="tukityo" class="form-control" style="width:200px" min="0" placeholder="毎月の貯金" /> 
-<br />  
-  <input class="btn btn-primary" type="submit" value="決定"/>
+    <div class="col-md-4" style="padding:0;">
+        <img src="kuruma.gif" />
+    </div>
+    <div class="col-md-4" style="padding:0;">
+        <img src="ie.gif" />
+    </div>
+    <div class="col-md-4" style="padding:0;">
+        <img src="marry.png" />
+    </div>
 </div>
-</div>
-</form>
-
-<form method="post" >
-<input type="text" name="age" th:value="${age}" />
-<input type="text" name="gessyuu" th:value="${gessyuu}" />
-<input type="text" name="tukityo" th:value="${tukityo}" />
-</form>
 
 
+<!-- 6:6に分割 -->
+<div class="row">
+    <div class="col-md-6" style="padding:0;">
+        <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #BAD3FF;">
+            <form method="post" th:action="@{/hogeinfo}">
+                <h2>現状について</h2>
+                    <h3>性別は？</h3><br />
+                        <div class="form-group">
+                            <select class="form-control" style="width:200px" name="gender" >
+                                <option value="man">男性</option>
+                                <option value="woman">女性</option>
+                            </select>
+                        </div>
+<br />
+
+                    
+                        <div class="form-group">
+                            <div class="row">
+                                <h3>現在の年齢は？</h3><br />
+                                    <input type="number" name="age" class="form-control" style="width:200px" min="0" placeholder="年齢" required="required" />
+                                <br />
+                                <h3>現在の月収は何万円ですか？</h3>（例：２０万円→20と入力）<br />
+                                    <input type="number" name="gessyuu" class="form-control" style="width:200px" min="0" placeholder="月収" required="required"/>
+                                <br />
+                                <h3>月いくら貯めれそうですか？</h3><br />
+                                    <input type="number" name="tukityo" class="form-control" style="width:200px" min="0" placeholder="毎月の貯金" required="required"/> 
+                                <br />  
+                                <input class="btn btn-primary" type="submit" value="決定"/>
+                            </div>
+                        </div>
+            </form>
+
+            <form method="post" >
+                <input type="text" name="age" th:value="${age}" />
+                <input type="text" name="gessyuu" th:value="${gessyuu}" />
+                <input type="text" name="tukityo" th:value="${tukityo}" />
+            </form>
 
 <br />
 <br />
 <br />
-<!-- 点線枠でくくって、背景クリーム色 -->
-<div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #FFCCCC;">
+        </div>
+    </div>
+
 
 <!-- 結婚の質問リスト＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
-<div id="marriage"></div>
-<h2>１．結婚について</h2>
+    <div class="col-md-6" style="padding:0;">
+        <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #FFCCCC;">
+            <div id="marriage"></div>
+                <h2>結婚について</h2>
+                <br />
 
-<br />
-
-<h3>結婚式はどこで行いますか？</h3><br />
-<form method="post" th:action="@{/hogemarry}">
-<div class="form-group">
-<select class="form-control" style="width:200px" name="marryprice" >
-<option value="sikire">レストラン</option>
-<option value="sikise">専門式場</option>
-<option value="sikiho">ホテル</option>
-<option value="sikige">ゲストハウス</option>
-<option value="sikino">やらない</option>
-<option value="sikisu">もうやった</option>
-</select>
+                <h3>結婚式はどこで行いますか？</h3><br />
+                    <form method="post" th:action="@{/hogemarry}">
+                        <div class="form-group">
+                            <select class="form-control" style="width:200px" name="marryprice" >
+                                <option value="sikire">レストラン</option>
+                                <option value="sikise">専門式場</option>
+                                <option value="sikiho">ホテル</option>
+                                <option value="sikige">ゲストハウス</option>
+                                <option value="sikino">やらない</option>
+                                <option value="sikisu">もうやった</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="row">
+                                <h3>新婚旅行の費用はいくらがいいですか？</h3><br />
+                                <input type="number" name="marrytrip" class="form-control" style="width:200px" min="0" placeholder="新婚旅行の費用" required="required"/>  
+                                <br />
+                            </div>
+                        </div>  
+                        <a href="http://www.honeymoon-s.jp/budget.html"> <br />
+                                                                新婚旅行　参考サイト
+                        </a>
+                        <br />
+                        <input class="btn btn-danger" type="submit" value="決定"/>
+                    </form>
+                    <input type="text" name="marryprice" th:value="${marryprice}" />
+                    <input type="text" name="marrytrip" th:value="${marrytrip}" />
+                        <br />
+                    <input type="text" name="marrysum" th:value="${marrysum}" />
+		<br /> <br /> <br /><br /> <br /> <br /><br /> <br /> <br /><br /> <br /> <br />
+            </div>
+      </div>
 </div>
 
-<br />
-<div class="form-group">
-<div class="row">
-          
-<h3>新婚旅行の費用はいくらがいいですか？</h3><br />
-  <input type="number" name="marrytrip" class="form-control" style="width:200px" min="0" placeholder="新婚旅行の費用" />  
-  <br />
-</div>
-</div>  
-  <a href="http://www.honeymoon-s.jp/budget.html"> <br />
-新婚旅行　参考サイト
-  </a>
-<br />
-  <input class="btn btn-danger" type="submit" value="決定"/>
-</form>
 
-
-<input type="text" name="marryprice" th:value="${marryprice}" />
-<input type="text" name="marrytrip" th:value="${marrytrip}" />
-<br />
-<input type="text" name="marrysum" th:value="${marrysum}" />
-
-
-		<br /> <br /> <br />
-</div>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #99FF99;">
 <div id="education"></div>
 		<!-- 教育の質問リスト========================================================= -->
 
-<h2>２．教育について</h2>
+<h2>教育について</h2>
 
 <div id="point"></div>
 
@@ -165,7 +164,7 @@ window.onload = function(){
 <div class="form-group">
 <div class="row">
 <h3>子供は何人ほしいですか？</h3><br />
-  <input type="number" name="child" class="form-control" style="width:200px" min="0" placeholder="子供の数" />
+  <input type="number" name="child" class="form-control" style="width:200px" min="0" placeholder="子供の数" required="required"/>
 <br />
 </div>
 </div>
@@ -255,25 +254,33 @@ window.onload = function(){
 		<br /> <br /> <br />
 </div>
 <!-- =================================================家の質問リスト============================================ -->
+
+<!-- 6:6に分割 -->
+<div class="row">
+    <div class="col-md-6" style="padding:0;">
 <div id="house"></div>
 
 
 <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #FFFF99;">
 
-<h2>３．住宅について</h2>
+<h2>住宅について</h2>
 
 
 
 <form method="post" th:action="@{/hogehouse}">
 <div class="form-group">
 <div class="row">
-<h3>(一人暮らし、同棲の場合)月の家賃、光熱費、水道代はまとめていくらですか？</h3><br />
-<input type="number" name="yatin" class="form-control" style="width:200px" min="0" placeholder="生活費" />
+<h3>(一人暮らし、同棲の場合)<br />
+月の家賃、光熱費、水道代は<br />
+まとめていくらですか？</h3><br />
+<input type="number" name="yatin" class="form-control" style="width:200px" min="0" placeholder="生活費" required="required"/>
 
 
 
-<h3>マイホームを購入する場合、どれくらいの金額を想定しますか？（購入予定がない場合、残りの住宅ローン額を入力）</h3><br />
-<input type="text" name="myhome" class="form-control" style="width:200px" min="0" placeholder="家賃" />
+<h3>マイホームを購入する場合、<br />
+どれくらいの金額を想定しますか？<br />
+（購入予定がない場合、残りの住宅ローン額を入力）</h3><br />
+<input type="number" name="myhome" class="form-control" style="width:200px" min="0" placeholder="家賃" required="required"/>
 
 </div>
 </div>
@@ -298,50 +305,49 @@ window.onload = function(){
 
 <br />
 </div>
+
+</div>
+    <div class="col-md-6" style="padding:0;">
+
 <!-- =================================================車の質問リスト============================================ -->
-<div id="car"></div>
-
-<div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #EDF7FF;">
-
-<h2>４．車について</h2>
-<form method="post" th:action="@{/hogecar}">
-
-
-<h3>どの車種が欲しいですか？</h3><br />
-<div class="form-group">
-<div class="row">
-<select class="form-control" style="width:200px" name="syasyu" >
-<option value="kei">軽自動車</option>
-<option value="kogata">小型乗用車</option>
-<option value="hutuu">普通乗用車</option>
-</select>
-</div>
-</div>
+        <div id="car"></div>
+            <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #EDF7FF;">
+                <h2>車について</h2>
+                    <form method="post" th:action="@{/hogecar}">
+                <h3>どの車種が欲しいですか？</h3><br />
+                <div class="form-group">
+                    <div class="row">
+                        <select class="form-control" style="width:200px" name="syasyu" >
+                            <option value="kei">軽自動車</option>
+                            <option value="kogata">小型乗用車</option>
+                            <option value="hutuu">普通乗用車</option>
+                            <option value="nocar">いらない</option>
+                        </select>
+                    </div>
+                </div>
 
 <a href="http://www.goo-net.com/market/index.html"> <br /> 
 車購入　参考サイト
 </a> 
-<h3>およそいくらの本体価格の車を購入したいですか？(購入したくない場合は0を入力)</h3><br />
-
-<div class="form-group">
-<div class="row">
-
-<input type="number" name="carprice" class="form-control" style="width:200px" min="0" placeholder="車の値段" />  
-  <br />
-
-<input class="btn btn-info" type="submit" value="決定"/>
-</div>
-</div>
-</form>
-
-<form method="post" >
-<input type="text" name="syasyu" th:value="${syasyu}" />
-<input type="text" name="carprice" th:value="${carprice}" />
-<br />
-<input type="text" name="carsum" th:value="${carsum}" />
-</form>
-
-
+                <h3>およそいくらの本体価格の車を<br />
+                                                購入したいですか？<br />
+                 (購入したくない場合は0を入力)</h3><br />
+                    <div class="form-group">
+                        <div class="row">
+                            <input type="number" name="carprice" class="form-control" style="width:200px" min="0" placeholder="車の値段" required="required"/>  
+                                <br />
+                            <input class="btn btn-info" type="submit" value="決定"/>
+                        </div>
+                    </div>
+                    </form>
+                <form method="post" >
+                    <input type="text" name="syasyu" th:value="${syasyu}" />
+                    <input type="text" name="carprice" th:value="${carprice}" />
+                    <br />
+                    <input type="text" name="carsum" th:value="${carsum}" />
+                </form>
+            </div>
+    </div>
 
 
 <a href="sisaku.html"> <br />
@@ -367,8 +373,7 @@ window.onload = function(){
 確認
 </a> 
 <br />
-
-</div>	
+</div>
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
