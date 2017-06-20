@@ -9,6 +9,7 @@ public class Userform {
     private int gessyuu;
     private int tukityo;
     private int endage;
+    private int yatin;
     private String marryprice;
     private String gender;
 

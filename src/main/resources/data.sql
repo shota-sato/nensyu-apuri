@@ -1,4 +1,4 @@
-insert into person (age, name, gender,child,yatin,carprice) values (23,'satosyota','male',1,100,100);
+insert into person (age, name, gender,birth) values (23,'satosyota','male',50);
 
 
 
