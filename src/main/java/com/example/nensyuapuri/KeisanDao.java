@@ -14,9 +14,8 @@ public class KeisanDao {
     @Autowired
     private JdbcTemplate jdbc;
     
-    public List<Person>findAll(){   //Person.java のage int にnullが入らないよって言ってる
-        //データベースの一行目にnullが入ってるので、エラー
-        return jdbc.query("select * from person", new BeanPropertyRowMapper<Person>(Person.class));        
+    public List<Person>findAll(){ 
+        return jdbc.query("select * from person", new BeanPropertyRowMapper<>(Person.class));        
     }
     
 /*    public List<Person>findByAge(int age){
