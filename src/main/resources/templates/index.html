@@ -25,30 +25,51 @@
     -->
 </head>
 <body>
-<div align="center">
+    <input id="user" type="hidden" th:value="${userName}" />
+        <div align="center">
 
-<h1 id="title">目指せ年収〇〇万円！</h1>
+            <h1 id="title">目指せ年収〇〇万円！</h1>
 
 <!-- 座標をHTMLに出力し、その値を読み取りコントローラーで移動　Javascript -->
-<input id="move" type="hidden" th:value="${movePoint}" />
-<script th:inline="javascript">
+                <input id="move" type="hidden" th:value="${movePoint}" />
+                    <script th:inline="javascript">
 /*<![CDATA[*/
-window.onload = function(){
+                        window.onload = function(){
     // 要素の位置を取得する
-    var movePoint = document.getElementById("move").value;
-    if(movePoint != ""){
-            var element = document.getElementById( movePoint ) ;
-            var rect = element.getBoundingClientRect() ;
-            var positionX = rect.left + window.pageXOffset ;    // 要素のX座標
-            var positionY = rect.top + window.pageYOffset ; // 要素のY座標
-
-    // 要素の位置にスクロールさせる
-           window.scrollTo( positionX, positionY ) ;
-    }
-}
+                            var movePoint = document.getElementById("move").value;
+                            if(movePoint != ""){
+                                var element = document.getElementById( movePoint ) ;
+                                var rect = element.getBoundingClientRect() ;
+                                var positionX = rect.left + window.pageXOffset ;    // 要素のX座標
+                                var positionY = rect.top + window.pageYOffset ; // 要素のY座標
+                                window.scrollTo( positionX, positionY ) ;
+                                }
+    
+                            var name = document.getElementById("user").value;//名前の取得
+                            document.info.action = document.info.action + ":" + name; //入力した名前ごとにそれぞれの項目を処理
+                            document.car.action = document.car.action + ":" + name;
+                            document.house.action = document.house.action + ":" + name;
+                            document.marry.action = document.marry.action + ":" + name;
+                            document.gaku.action = document.gaku.action + ":" + name;
+                            document.totalsum.action = document.totalsum.action + ":" + name;
+                            }
 /*]]>*/
 </script>
 
+
+<form method="post" th:action="@{/name}">
+<div class="form-group">
+<div class="row">
+名前は？<br />
+<input type="text" name="name" class="form-control" style="width:200px" min="0" placeholder="名前" required="required"/>
+
+</div>
+</div>
+<br />
+<input class="btn btn-warning" type="submit" value="ログイン"/>
+</form>
+
+<br />
 <div class="container">
 <div class="row">
     <div class="col-md-3" style="padding:0;background:#fff;height:160px;">
@@ -70,8 +91,10 @@ window.onload = function(){
 <div class="row">
     <div class="col-md-6" style="padding:0;">
         <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #BAD3FF; height:800px" >
-            <form method="post" th:action="@{/hogeinfo}">
+            <form name="info" method="post" th:action="@{/hogeinfo}"><!--  -->
                 <h2>現状について</h2>
+                    
+                    
                     <h3>性別は？</h3><br />
                         <div class="form-group">
                             <select class="form-control" style="width:200px" name="gender" >
@@ -98,12 +121,6 @@ window.onload = function(){
                         </div>
             </form>
 <br /><br /><br />
-<!--              <form method="post" >
-                <input type="text" name="age" th:value="${age}" />
-                <input type="text" name="gessyuu" th:value="${gessyuu}" />
-                <input type="text" name="tukityo" th:value="${tukityo}" />
-            </form>
--->
 
 <br />
     </div>
@@ -114,7 +131,7 @@ window.onload = function(){
         <div class="col-md-6" style="padding:0;">
             <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #EDF7FF; height:800px">
                 <h2>車について</h2>
-                    <form method="post" th:action="@{/hogecar}">
+                    <form name="car" method="post" th:action="@{/hogecar}"><!--  -->
                 <h3>どの車種が欲しいですか？</h3><br />
                 <div class="form-group">
                     <div class="row">
@@ -148,18 +165,11 @@ window.onload = function(){
                     <div class="form-group">
                         <div class="row">
                             <input type="number" name="carhaveend" class="form-control" style="width:200px" min="0"  required="required"/>  
-                            
+                            <br />
                              <input class="btn btn-info" type="submit" value="決定"/>
                         </div>
                     </div>
                     </form>
-<!--                  <form method="post" >
-                    <input type="text" name="syasyu" th:value="${syasyu}" />
-                    <input type="text" name="carprice" th:value="${carprice}" />
-                    <br />
-                    <input type="text" name="carsum" th:value="${carsum}" />
-                </form>
--->
             </div>
     </div>
 
@@ -180,15 +190,9 @@ window.onload = function(){
 
 
 
-<form method="post" th:action="@{/hogehouse}">
+<form name="house" method="post" th:action="@{/hogehouse}">
 <div class="form-group">
 <div class="row">
-<!--  
-<h3>(一人暮らし、同棲の場合)<br />
-月の家賃、光熱費、水道代は<br />
-まとめていくらですか？</h3><br />
-<input type="number" name="yatin" class="form-control" style="width:200px" min="0" placeholder="生活費" required="required"/>
--->
 
 
 <h3>マイホームを購入する場合、<br />
@@ -203,21 +207,13 @@ window.onload = function(){
 <a href="http://ie-daiku.org/saisin-souba.html"> <br /> 
 マイホーム購入　参考サイト
 </a> 
-
+<br />
 <br />
 <input class="btn btn-warning" type="submit" value="決定"/>
 </form>
 
 
-<!--  
-<form method="post" >
-<input type="text" name="yatin" th:value="${yatin}" />
-<input type="text" name="myhome" th:value="${myhome}" />
-<br />
-<input type="text" name="housesum" th:value="${housesum}" />
-
-</form>
---><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br />
 <br />
 </div>
 
@@ -231,7 +227,7 @@ window.onload = function(){
                 <br />
 
                 <h3>結婚式はどこで行いますか？</h3><br />
-                    <form method="post" th:action="@{/hogemarry}">
+                    <form name="marry" method="post" th:action="@{/hogemarry}">
                         <div class="form-group">
                             <select class="form-control" style="width:200px" name="marryprice" >
                                 <option value="sikire">レストラン</option>
@@ -253,14 +249,9 @@ window.onload = function(){
                         <a href="http://www.honeymoon-s.jp/budget.html"> <br />
                                                                 新婚旅行　参考サイト
                         </a>
-                        <br />
+                        <br /><br />
                         <input class="btn btn-danger" type="submit" value="決定"/>
                     </form>
-<!--                      <input type="text" name="marryprice" th:value="${marryprice}" />
-                    <input type="text" name="marrytrip" th:value="${marrytrip}" />
-                        <br />
-                    <input type="text" name="marrysum" th:value="${marrysum}" />
--->
 
             </div>
       </div>
@@ -275,7 +266,7 @@ window.onload = function(){
 <div id="point"></div>
 
 <br />
-<form method="post" th:action="@{/hogegaku}">
+<form name="gaku" method="post" th:action="@{/hogegaku}">
 <div class="form-group">
 <h2>教育について</h2>
 <div class="row">
@@ -354,27 +345,20 @@ window.onload = function(){
 </form>
 
 
-<!--  
-<input type="text" name="child" th:value="${child}" />
-<input type="text" name="you" th:value="${you}" />
-<input type="text" name="syou" th:value="${syou}" />
-<input type="text" name="tyuu" th:value="${tyuu}" />
-<input type="text" name="kou" th:value="${kou}" />
-<input type="text" name="dai" th:value="${dai}" />
-<input type="text" name="in" th:value="${in}" />
-
-
-<br />
-<input type="text" name="gakusum" th:value="${gakusum}" />
-
--->
 
         <br /> <br /> <br />
 </div>
 <br />
 <div id="down"></div>
-<form method="post" th:action="@{/hoge1000}">
+<form name="totalsum" method="post" th:action="@{/hoge1000}">
   <input type="submit" class="btn btn-primary" name="totalsum" value="総計表示"/>
+  
+  
+  
+  
+  
+  
+  
 </form>
 
 <br />

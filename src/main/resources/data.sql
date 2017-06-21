@@ -1,5 +1,4 @@
-insert into person (age, name, gender,birth) values (23,'satosyota','male',50);
-
+insert into person (name) values ('名前');
 
 
 

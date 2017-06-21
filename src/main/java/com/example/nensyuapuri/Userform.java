@@ -6,6 +6,7 @@ import lombok.Data;
 public class Userform {
 
     private int age;
+ 
     private int gessyuu;
     private int tukityo;
     private int endage;

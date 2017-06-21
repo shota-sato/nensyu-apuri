@@ -42,23 +42,23 @@
 <h1 id="title">です</h1>
 <br />
 <h1 id="title">理想の年収は・・・</h1> 
-<form method="post" th:action="@{/hoge2000}">
+<!--  <form method="post" th:action="@{/hoge2000}"> -->
 <div class="container">
 <div class="form-group">
 <div class="row">
-<input type="submit" class="btn btn-primary" value="年収表示" />
+
 <h1><span name="risoumax" th:text="${risoumax}">年収</span>万円です！</h1>
 </div>
 </div>
 </div>
-</form>
+<!--  </form> -->
 
 
-<form method="post" th:action="@{/hoge3000}">
+<!--  <form method="post" th:action="@{/hoge3000}"> -->
 <div class="container">
 <div class="form-group">
 <div class="row">
-<input type="submit" class="btn btn-primary" value="詳細" />
+
 <br />
 
 <div class="table-responsive" style="width:400px">    
@@ -67,6 +67,7 @@
 <tr>    <th>項目</th>         <th>値</th>          </tr>
 </thead>
 <tbody>
+<tr>    <td>名前</td>    <td><span name="name" th:text="${name}">あ</span></td>    </tr>
 <tr>    <td>現在の年齢</td>    <td><span name="age" th:text="${age}">あ</span>歳</td>    </tr>
 <tr>    <td>現在の月収</td>    <td><span name="gessyuu" th:text="${gessyuu}">げっしゅう</span>万円</td>    </tr>
 <tr>    <td>現在の毎月の貯金</td>    <td><span name="tukityo" th:text="${tukityo}">ちょきん</span>万円</td>    </tr>
@@ -91,7 +92,7 @@
 </div>
 </div>
 </div>
-</form>
+<!--  </form>  -->
 
 
 <a href="index.html">

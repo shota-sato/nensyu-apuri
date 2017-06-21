@@ -16,12 +16,12 @@ public class KeisanDao {
     
     public List<Person>findAll(){
         
-        return jdbc.query("select * from person", new BeanPropertyRowMapper<>(Person.class));        
+        return jdbc.query("select * from person", new BeanPropertyRowMapper<Person>(Person.class));        
     }
     
- /*   public List<Person>findByAge(int age){
+/*    public List<Person>findByAge(int age){
         
         return jdbc.queryForList("select * from person where age=?",20);
     }
-   */ 
+*/    
 }
