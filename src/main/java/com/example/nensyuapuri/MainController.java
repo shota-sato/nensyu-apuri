@@ -62,6 +62,8 @@ public class MainController {
         
         if(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name).size() == 0){
          jdbc.update("insert into person (name) values (?)", name);
+        } else{ 
+            
         }
         System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
         attr.addFlashAttribute("userName", jdbc.queryForList("SELECT name FROM person WHERE name = ?", name).get(0).get("name"));
@@ -77,9 +79,10 @@ public class MainController {
      * selectboxには回答を選択してもらい、それぞれの項目の値をpersonに保存
      * 正の値以外の数字や、文字は入力できないようになっている
      * 全ての質問が入力し終わったら、決定ボタンを押してもらい、personに保存。次の質問（車について）の頭に飛ぶ
-     * @param form
-     * @param attr
-     * @return
+     * @param name ログイン
+     * @param form formクラスの引数を使用
+     * @param attr リダイレクトを使用
+     * @return index.htmlに返る
      */    
   @PostMapping("/hogeinfo:{name}")
     public String agedisplay(@PathVariable String name,Userform form, RedirectAttributes attr){
@@ -110,9 +113,10 @@ public class MainController {
      * selectboxには回答を選択してもらい、それぞれの項目の値をpersonに保存
      * 正の値以外の数字や、文字は入力できないようになっている
      * 全ての質問が入力し終わったら、決定ボタンを押してもらい、personに保存。次の質問（住宅について）の頭に飛ぶ
-     * @param form
-     * @param attr
-     * @return
+     * @param syasyu 車種と所有期間から、維持費を計算
+     * @param carprice 車の値段を参考サイトより入力
+     * @param carhavestart 車種と所有期間から、維持費を計算
+     * @param carhaveend 車種と所有期間から、維持費を計算
      */
     @PostMapping("/hogecar:{name}")
     public String cardisplay(@PathVariable String name,String syasyu, int carprice, int carhavestart, int carhaveend, RedirectAttributes attr) {
@@ -147,9 +151,7 @@ public class MainController {
      * selectboxには回答を選択してもらい、それぞれの項目の値をpersonに保存
      * 正の値以外の数字や、文字は入力できないようになっている
      * 全ての質問が入力し終わったら、決定ボタンを押してもらい、personに保存。ページの末尾に飛ぶ
-     * @param form
-     * @param attr
-     * @return
+     * @param child 出産にかかる費用を計算
      */
 
     @PostMapping("/hogegaku:{name}")
@@ -228,9 +230,7 @@ public class MainController {
      * selectboxには回答を選択してもらい、それぞれの項目の値をpersonに保存
      * 正の値以外の数字や、文字は入力できないようになっている
      * 全ての質問が入力し終わったら、決定ボタンを押してもらい、personに保存。「結婚について」の頭に飛ぶ
-     * @param form
-     * @param attr
-     * @return
+     * @param myhome 参考サイトから入力
      */
  
     @PostMapping("/hogehouse:{name}")
@@ -256,9 +256,7 @@ public class MainController {
 * selectboxには回答を選択してもらい、それぞれの項目の値をpersonに保存
 * 正の値以外の数字や、文字は入力できないようになっている
 * 全ての質問が入力し終わったら、決定ボタンを押してもらい、personに保存。「教育について」の頭に飛ぶ
-* @param form
-* @param attr
-* @return
+* @param form　formクラスの引数を使用
 */
     
     @PostMapping("/hogemarry:{name}")
@@ -300,9 +298,6 @@ public class MainController {
 * risou=totalsum/労働年数（65－現在の年齢(age)）を計算し、保存
 * risoumax=2*risou-現在の年収 とする
 * kekka.htmlにて「理想の年収」を表示
-* @param form
-* @param attr
-* @return
 */
 
  @PostMapping("/hoge1000:{name}")
