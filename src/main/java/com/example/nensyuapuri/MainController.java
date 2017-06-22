@@ -62,12 +62,13 @@ public class MainController {
         
         if(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name).size() == 0){
          jdbc.update("insert into person (name) values (?)", name);
-        } else{ 
-            
+         System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
+         attr.addFlashAttribute("userName", jdbc.queryForList("SELECT name FROM person WHERE name = ?", name).get(0).get("name"));
+         attr.addFlashAttribute("movePoint", "car");} 
+        else{ 
+            attr.addFlashAttribute("dualname", "「" + name + "」は使用済みです。別のニックネームで再度入力してください。");
         }
-        System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
-        attr.addFlashAttribute("userName", jdbc.queryForList("SELECT name FROM person WHERE name = ?", name).get(0).get("name"));
-        attr.addFlashAttribute("movePoint", "car");
+        
         return "redirect:/index";
     }
 
@@ -87,18 +88,21 @@ public class MainController {
   @PostMapping("/hogeinfo:{name}")
     public String agedisplay(@PathVariable String name,Userform form, RedirectAttributes attr){
         
-        int endage = 0;
         if(form.getGender().equals("man")){
             jdbc.update("UPDATE person SET endage = 80 WHERE name = ?", name); 
-            endage = 80;
+            jdbc.update("UPDATE person SET hokenyears = 24 WHERE name = ?", name);
         } else if(form.getGender().equals("woman")){
             jdbc.update("UPDATE person SET endage = 87 WHERE name = ?", name);
-            endage = 87;
+            jdbc.update("UPDATE person SET hokenyears = 18 WHERE name = ?", name);
         }
         jdbc.update("UPDATE person SET age = ? WHERE name = ?", form.getAge(), name);
         jdbc.update("UPDATE person SET gessyuu = ? WHERE name = ?", form.getGessyuu(), name);
         jdbc.update("UPDATE person SET tukityo = ? WHERE name = ?", form.getTukityo(), name);
-        jdbc.update("UPDATE person SET yatin = ? WHERE name = ?", 12*(endage-form.getAge())*(form.getGessyuu()-form.getTukityo()), name);
+        
+        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person where name = ?",name).get(0);
+        jdbc.update("UPDATE person SET yatin = ? WHERE name = ?", 12*((int)person.get("endage")-(int)person.get("age"))*((int)person.get("gessyuu")-(int)person.get("tukityo")), name);
+        jdbc.update("UPDATE person SET hoken = ? WHERE name = ?", (int)person.get("hokenyears")*((int)person.get("endage")-(int)person.get("age")), name);
+        
         System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
         
         attr.addFlashAttribute("userName", name);
@@ -217,6 +221,7 @@ public class MainController {
     
         Map<String, Object> person = jdbc.queryForList("SELECT * FROM person where name = ?",name).get(0);
         jdbc.update("UPDATE person SET birth = ? where name = ?", (int)person.get("child")*50 ,name);//出産の費用計算
+        
         jdbc.update("UPDATE person SET gakusum = ? where name = ?",(int)person.get("child")*((int)person.get("you")+(int)person.get("syou")+(int)person.get("tyuu")+(int)person.get("kou")+(int)person.get("dai")),name);
         attr.addFlashAttribute("userName", name);
         attr.addFlashAttribute("movePoint", "down");
@@ -235,11 +240,11 @@ public class MainController {
  
     @PostMapping("/hogehouse:{name}")
     public String housedisplay(@PathVariable String name,int myhome, RedirectAttributes attr) {
-        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person").get(0);
+        Map<String, Object> person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
         jdbc.update("UPDATE person SET myhome = ? where name = ?", myhome, name);
                 
         person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
-        jdbc.update("UPDATE person SET housesum = ? where name = ?", ((int)person.get("yatin")+(int)person.get("myhome")),name);
+        jdbc.update("UPDATE person SET housesum = ? where name = ?", (int)person.get("myhome"),name);
 
         person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
         attr.addFlashAttribute("userName", name);
@@ -303,11 +308,11 @@ public class MainController {
  @PostMapping("/hoge1000:{name}")
      public String totalsumdisplay(@PathVariable String name,RedirectAttributes attr){
          Map<String, Object> person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
-         jdbc.update("UPDATE person SET totalsum = ? where name = ?", (int)person.get("birth")+(int)person.get("carsum")+(int)person.get("housesum")+(int)person.get("marrysum")+(int)person.get("gakusum"),name);
+         jdbc.update("UPDATE person SET totalsum = ? where name = ?", (int)person.get("hoken")+(int)person.get("birth")+(int)person.get("carsum")+(int)person.get("housesum")+(int)person.get("marrysum")+(int)person.get("gakusum"),name);
          person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
          attr.addFlashAttribute("totalsum", (int)person.get("totalsum"));
 
-         jdbc.update("UPDATE person SET risou = ? where name = ?", (int)person.get("totalsum")/(65-(int)person.get("age")),name);
+         jdbc.update("UPDATE person SET risou = ? where name = ?", ((int)person.get("totalsum")/(65-(int)person.get("age"))-12*(int)person.get("tukityo")+12*(int)person.get("gessyuu")),name);
          
          person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
          
