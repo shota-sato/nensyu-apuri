@@ -64,7 +64,7 @@ public class MainController {
          jdbc.update("insert into person (name) values (?)", name);
          System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
          attr.addFlashAttribute("userName", jdbc.queryForList("SELECT name FROM person WHERE name = ?", name).get(0).get("name"));
-         attr.addFlashAttribute("movePoint", "car");} 
+         attr.addFlashAttribute("movePoint", "info");} 
         else{ 
             attr.addFlashAttribute("dualname", "「" + name + "」は使用済みです。別のニックネームで再度入力してください。");
         }
@@ -347,7 +347,15 @@ public class MainController {
          attr.addFlashAttribute("userName", name);
      return "redirect:/kekka";
      }
+ @PostMapping("/hogeend")
+ public String end(String userName, RedirectAttributes attr){
+    System.out.println(userName);
+     jdbc.update("DELETE FROM person where name = ?",userName);
+     
+ return "redirect:/index";
+ }
 
+ 
 /////////////////////////////////////////////////////////////////////////////////////////    
 
  @Autowired

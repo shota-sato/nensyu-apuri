@@ -32,13 +32,13 @@
 
 
 <div align="center">
+
 <h1 id="title">かかる費用の総計は・・・</h1>
 
 
 
-<form method="post" >
-<h1><span name="totalsum" th:text="${totalsum}">そうけい</span>万円です</h1>
-</form>
+
+<h1><span name="totalsum" th:text="${totalsum}">そうけい</span>万円</h1>
 <h1 id="title">です</h1>
 <br />
 <h1 id="title">理想の年収は・・・</h1> 
@@ -60,7 +60,6 @@
 <div class="row">
 
 <br />
-
 <div class="table-responsive" style="width:400px">    
 <table class="table table-striped table-bordered">
 <thead>
@@ -71,7 +70,6 @@
 <tr>    <td>現在の年齢</td>    <td><span name="age" th:text="${age}">あ</span>歳</td>    </tr>
 <tr>    <td>現在の月収</td>    <td><span name="gessyuu" th:text="${gessyuu}">げっしゅう</span>万円</td>    </tr>
 <tr>    <td>現在の毎月の貯金</td>    <td><span name="tukityo" th:text="${tukityo}">ちょきん</span>万円</td>    </tr>
-<!--  <tr>    <td>自分の生涯の生活費</td>    <td><span name="yatin" th:text="${yatin}">やちん</span>万円</td>    </tr>-->
 <tr>    <td>結婚式</td>    <td><span name="marryprice" th:text="${marryprice}">けっこんしき</span>万円</td>    </tr>
 <tr>    <td>新婚旅行</td>    <td><span name="marrytrip" th:text="${marrytrip}">りょこう</span>万円</td>    </tr>
 <tr>    <td>出産にかかる費用</td>    <td><span name="birth" th:text="${birth}">しゅっさん</span>万円</td>    </tr>
@@ -85,6 +83,7 @@
 <tr>    <td>マイホームの額</td>    <td><span name="myhome" th:text="${myhome}">まいほーむ</span>万円</td>    </tr>
 <tr>    <td>車の維持費</td>    <td><span name="syasyu" th:text="${syasyu}">いじひ</span>万円</td>    </tr>
 <tr>    <td>車の値段</td>    <td><span name="carprice" th:text="${carprice}">くるま</span>万円</td>    </tr>
+<tr>    <td>自分の生涯の生活費</td>    <td><span name="yatin" th:text="${yatin}">やちん</span>万円</td>    </tr>
 
 </tbody>
 </table>
@@ -99,6 +98,12 @@
 </a>
 
 <br />
+
+
+<form name="totalsum" method="post" th:action="@{/hogeend}">
+  <input type="hidden" name="userName" th:value="${name}" />
+  <input type="submit" class="btn btn-primary" name="end" value="終了"/>
+</form>
 
 </div>
 
