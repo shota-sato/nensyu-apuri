@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <link rel="stylesheet" href="style.css" />
 <title>目指せ！年収〇〇万円！</title>
+<link rel="icon" href="icon.ico" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -91,7 +92,11 @@
 
 <br />
 
-<h3>注意：〇万円と入力する場合、〇の値を入力してください</h3>
+<h3>＜使い方＞<br />
+〇万円と入力する場合、〇の値を入力<br />
+項目毎の質問に回答したら「決定」ボタンをクリック<br />
+全ての質問を回答したら「年収表示」ボタンをクリック</h3>
+
 <div class="container">
 <!--  
 <div class="row">
@@ -279,7 +284,7 @@
 
             </div>
       </div>
-<br /> 
+ 
 </div>
 <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #99FF99;">
 <div id="education"></div>
@@ -375,13 +380,21 @@
 </div>
 <br />
 <div id="down"></div>
+<h3>全て回答したらボタンクリック！！</h3>
 <form name="totalsum" method="post" th:action="@{/hoge1000}">
-  <input type="submit" class="btn btn-primary" name="totalsum" value="総計表示"/>
+  <input type="submit" class="btn btn-primary" name="totalsum" value="年収表示" />
   
   
 </form>
 
 <br />
+
+<ul class="bxslider">
+        <li><img src="car.png"  /></li>
+        <li><img src="richhouse.png"  /></li>
+        <li><img src="marry.png"  /></li>
+        <li><img src="school.png"  /></li>
+    </ul>
 
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
