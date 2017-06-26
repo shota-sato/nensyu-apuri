@@ -62,7 +62,7 @@ public class MainController {
         
         if(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name).size() == 0){
          jdbc.update("insert into person (name) values (?)", name);
-         System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
+ //        System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
          attr.addFlashAttribute("userName", jdbc.queryForList("SELECT name FROM person WHERE name = ?", name).get(0).get("name"));
          attr.addFlashAttribute("movePoint", "info");} 
         else{ 
@@ -103,7 +103,7 @@ public class MainController {
         jdbc.update("UPDATE person SET yatin = ? WHERE name = ?", 12*((int)person.get("endage")-(int)person.get("age"))*((int)person.get("gessyuu")-(int)person.get("tukityo")), name);
         jdbc.update("UPDATE person SET hoken = ? WHERE name = ?", (int)person.get("hokenyears")*((int)person.get("endage")-(int)person.get("age")), name);
         
-        System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
+ //       System.out.println(jdbc.queryForList("SELECT * FROM person WHERE name = ?", name));
         
         attr.addFlashAttribute("userName", name);
         attr.addFlashAttribute("movePoint", "car");
@@ -145,7 +145,7 @@ public class MainController {
 
         attr.addFlashAttribute("movePoint", "house");
         attr.addFlashAttribute("userName", name);
-        System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
+ //       System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
         return "redirect:/index";
     } 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,7 +225,7 @@ public class MainController {
         jdbc.update("UPDATE person SET gakusum = ? where name = ?",(int)person.get("child")*((int)person.get("you")+(int)person.get("syou")+(int)person.get("tyuu")+(int)person.get("kou")+(int)person.get("dai")),name);
         attr.addFlashAttribute("userName", name);
         attr.addFlashAttribute("movePoint", "down");
-        System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
+ //       System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
         return "redirect:/index";
     }
 /////////////////////////////////////////////////////////////////////////////////////////    
@@ -249,7 +249,7 @@ public class MainController {
         person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
         attr.addFlashAttribute("userName", name);
         attr.addFlashAttribute("movePoint", "marriage");
-        System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
+  //      System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
 
         return "redirect:/index";
     }
@@ -289,7 +289,7 @@ public class MainController {
               jdbc.update("UPDATE person SET marrysum = ? where name = ?", (int)person.get("marryprice")+(int)person.get("marrytrip"),name);
           person = jdbc.queryForList("SELECT * FROM person where name = ?", name).get(0);
               attr.addFlashAttribute("movePoint", "education");
-          System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
+  //        System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));
           attr.addFlashAttribute("userName", name);
       return "redirect:/index";
   }
@@ -343,13 +343,13 @@ public class MainController {
          attr.addFlashAttribute("carprice", (int)person.get("carprice"));
          
          
-         System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));         
+ //        System.out.println(jdbc.queryForList("SELECT * FROM person where name = ?", name));         
          attr.addFlashAttribute("userName", name);
      return "redirect:/kekka";
      }
  @PostMapping("/hogeend")
  public String end(String userName, RedirectAttributes attr){
-    System.out.println(userName);
+  //  System.out.println(userName);
      jdbc.update("DELETE FROM person where name = ?",userName);
      
  return "redirect:/index";

@@ -1,22 +1,21 @@
 @charset "UTF-8";
-
-@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 h1 {
 	color: #cc0033;   /*文字の色を変更　#cc0033は赤*/
     font-size: 45px;    /*文字サイズ変更*/
+    font-family: 'fantasy';
 }
-
 
 #title {
 	color: #6600ff;     /*h1内のid="title" の部分のみ変更*/
-	font-family: monospace;
 }
 
-
+h2 {
+	color: #008000;     /*h2内のid="marry" の部分のみ変更*/
+}
 
 p {
-	color: blue;
-	font-size: 20px;
+	color: #666;
+	font-size: 16px;
 }
 
 img {
