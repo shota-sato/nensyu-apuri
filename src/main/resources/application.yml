@@ -8,3 +8,6 @@ spring:
     url: jdbc:h2:c:\${app.name}\db\${app.name}
     username: sa
     password: 
+    
+server:
+ port: 8085
