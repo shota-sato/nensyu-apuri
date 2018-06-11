@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="style.css" />
+<title>目指せ！年収〇〇万円！</title>
+<link rel="icon" href="icon.ico" />
+<!-- Latest compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- </link> -->
+    
+<!--      <style>
+      @media (min-width: 768px) {
+        .container {
+          max-width: 730px;
+        }
+      }
+    </style>
+    -->
+    
+    <link href="slider/jquery.bxslider.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="slider/jquery.bxslider.min.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function(){
+                $('.bxslider').bxSlider({
+                    auto: true
+                });
+            });
+    </script>
+</head>
+<body>
+    <input id="user" type="hidden" th:value="${userName}" />
+        <div align="center">
+
+            <h1 id="title">目指せ年収〇〇万円！</h1>
+
+<!-- 座標をHTMLに出力し、その値を読み取りコントローラーで移動　Javascript -->
+                <input id="move" type="hidden" th:value="${movePoint}" />
+                    <script th:inline="javascript">
+/*<![CDATA[*/
+                        window.onload = function(){
+    // 要素の位置を取得する
+                            var movePoint = document.getElementById("move").value;
+                            if(movePoint != ""){
+                                var element = document.getElementById( movePoint ) ;
+                                var rect = element.getBoundingClientRect() ;
+                                var positionX = rect.left + window.pageXOffset ;    // 要素のX座標
+                                var positionY = rect.top + window.pageYOffset ; // 要素のY座標
+                                window.scrollTo( positionX, positionY ) ;
+                                }
+    
+                            var name = document.getElementById("user").value;//名前の取得
+                            document.info.action = document.info.action + ":" + name; //入力した名前ごとにそれぞれの項目を処理
+                            document.car.action = document.car.action + ":" + name;
+                            document.house.action = document.house.action + ":" + name;
+                            document.marry.action = document.marry.action + ":" + name;
+                            document.gaku.action = document.gaku.action + ":" + name;
+                            document.totalsum.action = document.totalsum.action + ":" + name;
+                            }
+                    
+/*]]>*/
+</script>
+
+
+<ul class="bxslider">
+        <li><img src="car.png"  /></li>
+        <li><img src="richhouse.png"  /></li>
+        <li><img src="marry.png"  /></li>
+        <li><img src="school.png"  /></li>
+    </ul>
+
+<form method="post" th:action="@{/name}">
+<div class="form-group">
+<div class="row">
+<h3>IDを入力してください<br />
+（名前、ニックネーム、数字など）</h3><br />
+<input type="text" name="name" class="form-control" style="width:200px" min="0" placeholder="名前" required="required"/>
+<span name="dualname" th:text="${dualname}"></span>
+</div>
+</div>
+<br />
+<input class="btn btn-warning" type="submit" value="ログイン"/>
+</form>
+
+<br />
+
+<h3>＜使い方＞<br />
+〇万円と入力する場合、〇の値を入力<br />
+項目毎の質問に回答したら「決定」ボタンをクリック<br />
+全ての質問を回答したら「年収表示」ボタンをクリック</h3>
+
+<div class="container">
+<!--  
+<div class="row">
+    <div class="col-md-3" style="padding:0;background:#fff;height:160px;">
+        <a href="#car"><img src="car.png" class="img-responsible"/></a>
+    </div>
+    <div class="col-md-3" style="padding:0;background:#fff;height:160px;">
+        <a href="#house"><img src="house.png" class="img-responsible"/></a>
+    </div>
+    <div class="col-md-3" style="padding:0;background:#fff;height:160px;">
+        <a href="#marriage"><img src="marry.png" class="img-responsible"/></a>
+    </div>
+    <div class="col-md-3" style="padding:0;background:#fff;height:160px;">
+        <a href="#education"><img src="school.png" class="img-responsible"/></a>
+    </div>
+</div>
+-->
+</div>
+<div id="info"></div>
+<!-- 6:6に分割 -->
+<div class="row">
+    <div class="col-md-6" style="padding:0;">
+        <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #BAD3FF; height:800px" >
+            <form name="info" method="post" th:action="@{/hogeinfo}">
+                <h2>＜現状について＞</h2>
+                    
+                    
+                    <h3>性別は？</h3><br />
+                        <div class="form-group">
+                            <select class="form-control" style="width:200px" name="gender" >
+                                <option value="man">男性</option>
+                                <option value="woman">女性</option>
+                            </select>
+                        </div>
+<br />
+
+                    
+                        <div class="form-group">
+                            <div class="row">
+                                <h3>現在の年齢は？</h3><br />
+                                    <input type="number" name="age" class="form-control" style="width:200px" min="0" placeholder="年齢" required="required" />
+                                <br />
+                                <h3>現在の月収は何万円ですか？<br />（例：２０万円→20と入力）</h3><br />
+                                    <input type="number" name="gessyuu" class="form-control" style="width:200px" min="0" max="2147483647" placeholder="月収" required="required"/>
+                                <br />
+                                <h3>月いくら貯めれそうですか？</h3><br />
+                                    <input type="number" name="tukityo" class="form-control" style="width:200px" min="0" placeholder="毎月の貯金" required="required"/> 
+                                <br />  
+                                <input class="btn btn-primary" type="submit" value="決定"/>
+                            </div>
+                        </div>
+            </form>
+<br /><br /><br />
+
+<br />
+    </div>
+    </div>
+
+<!-- =================================================車の質問リスト============================================ -->
+        <div id="car"></div>
+        <div class="col-md-6" style="padding:0;">
+            <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #EDF7FF; height:800px">
+                <h2>＜車について＞</h2>
+                    <form name="car" method="post" th:action="@{/hogecar}"><!--  -->
+                <h3>どの車種が欲しいですか？</h3><br />
+                <div class="form-group">
+                    <div class="row">
+                        <select class="form-control" style="width:200px" name="syasyu" >
+                            <option value="kei">軽自動車</option>
+                            <option value="kogata">小型乗用車</option>
+                            <option value="hutuu">普通乗用車</option>
+                            <option value="nocar">いらない</option>
+                        </select>
+                    </div>
+                </div>
+
+<a target="_blank" href="http://www.goo-net.com/market/index.html"> <br /> 
+<h4>＜車購入　参考サイト＞</h4>
+</a> 
+                <h3>およそいくらの本体価格の車を<br />
+                                                購入したいですか？<br />
+                 (購入したくない場合は0を入力)</h3><br />
+                    <div class="form-group">
+                        <div class="row">
+                            <input type="number" name="carprice" class="form-control" style="width:200px" min="0" placeholder="車の値段" required="required"/>  
+                                <br /></div></div>
+                <h3>車を何歳で購入したいですか？<br />                                              
+                 (購入したくない場合は0を入力)</h3><br />
+                    <div class="form-group">
+                        <div class="row">
+                            <input type="number" name="carhavestart" class="form-control" style="width:200px" min="0"  required="required"/>  
+                             <br /></div></div>
+                 <h3>車を何歳まで所有したいですか？<br />                                              
+                 (購入したくない場合は0を入力)</h3><br />
+                    <div class="form-group">
+                        <div class="row">
+                            <input type="number" name="carhaveend" class="form-control" style="width:200px" min="0"  required="required"/>  
+                            <br />
+                             <input class="btn btn-info" type="submit" value="決定"/>
+                        </div>
+                    </div>
+                    </form>
+            </div>
+    </div>
+
+
+</div>
+
+<!-- =================================================家の質問リスト============================================ -->
+
+<!-- 6:6に分割 -->
+<div class="row">
+    <div class="col-md-6" style="padding:0;">
+<div id="house"></div>
+
+
+<div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #FFFF99; height:550px">
+
+<h2>＜住宅について＞</h2>
+
+
+
+<form name="house" method="post" th:action="@{/hogehouse}">
+<div class="form-group">
+<div class="row">
+
+
+<h3>マイホームを購入する場合、<br />
+どれくらいの金額を想定しますか？<br />
+（購入予定がない場合、残りの住宅ローン額を入力）</h3><br />
+<input type="number" name="myhome" class="form-control" style="width:200px" min="0" placeholder="家賃" required="required"/>
+
+</div>
+</div>
+<br />
+
+<a target="_blank" href="http://ie-daiku.org/saisin-souba.html"> <br /> 
+<h4>＜マイホーム購入　参考サイト＞</h4>
+</a> 
+<br />
+<br />
+<input class="btn btn-warning" type="submit" value="決定"/>
+</form>
+
+
+<br /><br /><br /><br /><br />
+<br />
+</div>
+
+</div>
+    <div class="col-md-6" style="padding:0;">
+
+<!-- 結婚の質問リスト＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ -->
+        <div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #FFCCCC; height:550px">
+            <div id="marriage"></div>
+                <h2>＜結婚について＞</h2>
+                <br />
+
+                <h3>結婚式はどこで行いますか？</h3><br />
+                    <form name="marry" method="post" th:action="@{/hogemarry}">
+                        <div class="form-group">
+                            <select class="form-control" style="width:200px" name="marryprice" >
+                                <option value="sikire">レストラン</option>
+                                <option value="sikise">専門式場</option>
+                                <option value="sikiho">ホテル</option>
+                                <option value="sikige">ゲストハウス</option>
+                                <option value="sikino">やらない</option>
+                                <option value="sikisu">もうやった</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="row">
+                                <h3>新婚旅行の費用はいくらがいいですか？</h3><br />
+                                <input type="number" name="marrytrip" class="form-control" style="width:200px" min="0" placeholder="新婚旅行の費用" required="required"/>  
+                                <br />
+                            </div>
+                        </div>  
+                        <a target="_blank" href="http://www.honeymoon-s.jp/budget.html"> <br />
+                         <h4>＜新婚旅行　参考サイト＞</h4>
+                        </a>
+                        <br /><br />
+                        <input class="btn btn-danger" type="submit" value="決定"/>
+                    </form>
+
+            </div>
+      </div>
+ 
+</div>
+<div style="padding: 10px; margin-bottom: 10px; border: 1px dotted #333333; background-color: #99FF99;">
+<div id="education"></div>
+<!-- 教育の質問リスト========================================================= -->
+
+
+
+<div id="point"></div>
+
+<br />
+<form name="gaku" method="post" th:action="@{/hogegaku}">
+<div class="form-group">
+<h2>＜教育について＞</h2>
+<div class="row">
+<h3>子供は何人ほしいですか？</h3><br />
+  <input type="number" name="child" class="form-control" style="width:200px" min="0" placeholder="子供の数" required="required"/>
+<br />
+</div>
+</div>
+<h3>幼稚園に通わせるのは？</h3><br />
+<div class="form-group">
+<select class="form-control" style="width:200px" name="you" >
+<option value="yoko">公立</option>
+<option value="yosi">私立</option>
+</select>
+</div>
+<br />
+
+<h3>小学校に通わせるのは？</h3><br />
+<div class="form-group">
+<select class="form-control" style="width:200px" name="syou" >
+<option value="syoko">公立</option>
+<option value="syosi">私立</option>
+</select>
+</div>
+<br />
+
+<h3>中学校に通わせるのは？</h3><br /> 
+<div class="form-group">
+<select class="form-control" style="width:200px" name="tyuu" >
+<option value="tyuuko">公立</option>
+<option value="tyuusi">私立</option>
+</select>
+</div>
+
+<br />
+<h3>高校に通わせるのは？</h3><br />
+<div class="form-group">
+<select class="form-control" style="width:200px" name="kou" >
+<option value="kouko">公立</option>
+<option value="kousi">私立</option>
+</select>
+</div>
+
+<br />
+<h3>大学に通わせるのは？</h3><br /> 
+<div class="form-group">
+<select class="form-control" style="width:200px" name="dai" >
+<option value="daikokuzi">国公立(自宅通学)</option>
+<option value="daikokuhi">国公立(自宅外)</option>
+<option value="daisibuzi">私立文系(自宅通学)</option>
+<option value="daisibuhi">私立文系(自宅外)</option>
+<option value="daisirizi">私立理系(自宅通学)</option>
+<option value="daisirihi">私立理系(自宅外)</option>
+<option value="daisihazi">私立医歯系(自宅通学)</option>
+<option value="daisihahi">私立医歯系(自宅外)</option>
+<option value="daino">通わせない</option>
+</select>
+</div>
+<br />
+
+<h3>大学院に通わせるのは？</h3>
+<div class="form-group">
+<select class="form-control" style="width:200px" name="in" >
+<option value="inkoku">国公立</option>
+<option value="insibu">私立文系</option>
+<option value="insiri">私立理系</option>
+<option value="insiha">私立医歯系</option>
+<option value="inno">通わせない</option>
+</select>
+</div>
+
+
+
+<br />
+<input class="btn btn-success" type="submit" value="決定"/>
+</form>
+
+
+
+
+        <br /> <br /> <br />
+</div>
+<br />
+<div id="down"></div>
+<h3>全て回答したらボタンクリック！！</h3>
+<form name="totalsum" method="post" th:action="@{/hoge1000}">
+  <input type="submit" class="btn btn-primary" name="totalsum" value="年収表示" />
+  
+  
+</form>
+
+<br />
+
+<ul class="bxslider">
+        <li><img src="car.png"  /></li>
+        <li><img src="richhouse.png"  /></li>
+        <li><img src="marry.png"  /></li>
+        <li><img src="school.png"  /></li>
+    </ul>
+
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

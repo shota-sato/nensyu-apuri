@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="style.css" />
+<title>目指せ！年収〇〇万円！</title>
+</head>
+<body>
+
+
+
+<h1 id="title">目指せ年収〇〇万円！</h1>
+
+
+
+<!-- 画像の貼り付け -->
+<img src="kuruma.gif" /> 
+<img src="ie.gif" />
+<img src="marry.png" />
+
+<p>質問にお答えください</p>
+
+<p>
+性別は？<br /> 
+<select name="gender">
+<option value="man">男性</option>
+<option value="woman">女性</option>
+</select>
+</p>
+
+<!-- 送信ボタン /formに飛ぶ=========================================== -->
+現在の年齢は？<br />
+
+
+<!-- 表示される文章================== -->
+<span th:text="${age}">20</span>才です。 
+ 
+<br /> 
+
+
+</body>
+</html>
+ 
